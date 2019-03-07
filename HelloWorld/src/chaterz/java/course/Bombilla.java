@@ -4,6 +4,10 @@ public class Bombilla {
 	
 	boolean encendido = false;
 	
+	public Bombilla() {
+		System.out.println(this + ": acabo de ser creada");
+	}
+	
 	public void encender() {
 		System.out.println(this + ": me han encendido");
 		encendido = true;

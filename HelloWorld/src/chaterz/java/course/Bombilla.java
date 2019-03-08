@@ -20,6 +20,7 @@ public class Bombilla {
 	}
 	public boolean isEncendido() { return encendido; }
 	
+	@Override
 	public String toString() {
 		return "[" + m_name + "]";
 	}

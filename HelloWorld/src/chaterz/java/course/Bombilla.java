@@ -14,6 +14,8 @@ public class Bombilla {
 		m_name = name;
 	}
 
+	/* métodos Staticos */
+
 	public void encender() {
 		System.out.println(this + ": me han encendido");
 		encendido = true;
@@ -26,15 +28,15 @@ public class Bombilla {
 
 	public boolean isEncendido() {
 		return encendido;
-	} /* <-- esto no lo piyo /// este es el getter, cuando un campo es boolean. */
+	}
 
 	public void setEncendido(boolean encendido) {
 		this.encendido = encendido;
 	}
 
-//	public boolean isAfluorescente() { return tipo; } /* chaterz */
 
-	/* Solo se hacer construcctores a partir de Strings o instancias */
+
+	/* Getter and Setters */
 	public String getPotencia() {
 		return potencia;
 	}
@@ -51,14 +53,7 @@ public class Bombilla {
 		this.precio = precio;
 	}
 
-	/**
-	 * My Mombilla
-	 */
-	/*
-	 * public String luz; public String vatios; public String forma; public String
-	 * tipo; public String precio;
-	 */
-	/* El constructor esta hecho en base al las instancias precio y potencia */
+
 
 	public String toString() {
 		return "[" + m_name + "]";

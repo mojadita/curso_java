@@ -2,17 +2,12 @@ package chaterz.java.course;
 
 public class Bombilla {
 
-	public void bombilla() {
-	} /* chaterz */
-
-	public void setEncendido(boolean encendido) {
-		this.encendido = encendido;
-	}
-
 	/* boolean no tiene get, al generar getter an setter solo genera setter ? */
 
 	boolean encendido = false;
 	String m_name;
+	public String potencia;
+	public int precio;
 
 	public Bombilla(String name) {
 		System.out.println(super.toString() + ": acabo de ser creada");
@@ -31,7 +26,11 @@ public class Bombilla {
 
 	public boolean isEncendido() {
 		return encendido;
-	} /* <-- esto no lo piyo */
+	} /* <-- esto no lo piyo /// este es el getter, cuando un campo es boolean. */
+
+	public void setEncendido(boolean encendido) {
+		this.encendido = encendido;
+	}
 
 //	public boolean isAfluorescente() { return tipo; } /* chaterz */
 
@@ -59,9 +58,6 @@ public class Bombilla {
 	 * public String luz; public String vatios; public String forma; public String
 	 * tipo; public String precio;
 	 */
-
-	public String potencia;
-	public int precio;
 	/* El constructor esta hecho en base al las instancias precio y potencia */
 
 	public String toString() {

@@ -11,6 +11,12 @@ public class Bombilla {
 	/* boolean no tiene get, al generar getter an setter solo genera setter ? */
 
 	boolean encendido = false;
+	String m_name;
+	
+	public Bombilla(String name) {
+		System.out.println(super.toString() + ": acabo de ser creada");
+		m_name = name;
+	}
 	
 	public void encender() {
 		System.out.println(this + ": me han encendido");
@@ -20,6 +26,7 @@ public class Bombilla {
 		System.out.println(this + ": me han apagado");
 		encendido = false;
 	}
+	
 	public boolean isEncendido() { return encendido; } /* <-- esto no lo piyo */
 
 	public boolean isAfluorescente() { return tipo; } /* chaterz */
@@ -60,4 +67,8 @@ public class Bombilla {
 	/* El constructor esta hecho en base al las instancias precio y potencia */
 	
 
+	
+	public String toString() {
+		return "[" + m_name + "]";
+	}
 }

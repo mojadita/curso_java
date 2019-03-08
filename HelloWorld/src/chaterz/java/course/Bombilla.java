@@ -2,7 +2,7 @@ package chaterz.java.course;
 
 public class Bombilla {
 
-	public void bombilla(){}
+	public void bombilla(){} /* chaterz */
 
 	public void setEncendido(boolean encendido) {
 		this.encendido = encendido;
@@ -22,7 +22,7 @@ public class Bombilla {
 	}
 	public boolean isEncendido() { return encendido; } /* <-- esto no lo piyo */
 
-	public boolean isAfluorescente() { return tipo; }
+	public boolean isAfluorescente() { return tipo; } /* chaterz */
 
 
 
@@ -41,7 +41,7 @@ public class Bombilla {
 		return precio;
 	}
 
-	public void setPrecio(int precio) {
+	public void setPrecio(int precio) {  /* chaterz */
 		this.precio = precio;
 	}
 
@@ -57,5 +57,7 @@ public class Bombilla {
 
 	public String potencia;
 	public int precio;
+	/* El constructor esta hecho en base al las instancias precio y potencia */
+	
 
 }

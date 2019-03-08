@@ -3,9 +3,11 @@ package chaterz.java.course;
 public class Bombilla {
 	
 	boolean encendido = false;
+	String m_name;
 	
-	public Bombilla() {
-		System.out.println(this + ": acabo de ser creada");
+	public Bombilla(String name) {
+		System.out.println(super.toString() + ": acabo de ser creada");
+		m_name = name;
 	}
 	
 	public void encender() {
@@ -17,5 +19,8 @@ public class Bombilla {
 		encendido = false;
 	}
 	public boolean isEncendido() { return encendido; }
-
+	
+	public String toString() {
+		return "[" + m_name + "]";
+	}
 }

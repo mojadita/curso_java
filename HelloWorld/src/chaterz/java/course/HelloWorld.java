@@ -14,8 +14,8 @@ public class HelloWorld {
 
 	public static void main(String[] args) {
 		System.out.println("Buenas!!");
-		Bombilla b1 = new Bombilla();
-		Bombilla b2 = new Bombilla();
+		Bombilla b1 = new Bombilla("b1");
+		Bombilla b2 = new Bombilla("b2");
 		print_state(b1, b2);
 		b1.encender();
 		print_state(b1, b2);

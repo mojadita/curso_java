@@ -4,7 +4,18 @@ public class Puerta {
 
     boolean abierta = false;
     String p_barras;
-    String tipo;
+    String tipo1 = "madera";
+    String tipo2 = "acero";
+
+    public String getTipo2() {
+        return tipo2;
+    }
+
+    public void setTipo2(String tipo2) {
+        this.tipo2 = tipo2;
+    }
+
+
 
     public String getP_barras() {
         return p_barras;
@@ -15,11 +26,11 @@ public class Puerta {
     }
 
     public String getTipo() {
-        return tipo;
+        return tipo1;
     }
 
     public void setTipo(String tipo) {
-        this.tipo = tipo;
+        this.tipo1 = tipo1;
     }
 
 
@@ -30,15 +41,18 @@ public class Puerta {
         p_barras = name;
 
     }
+    public void stadopuertas() {
+        System.out.println("====Estado De Las Puertas=====");
+    }
 
     public void abrir(){
-        System.out.println(this + ":La Puerta está Abierta");
+        System.out.println(this + ":Esta Puerta está Abierta y es de Tipo\n" + this.tipo1 );
         abierta = true;
 
     }
 
     public void cerrar() {
-      System.out.println(this +":LaPuerta está Cerrada.");
+      System.out.println(this +":Esta Puerta está Cerrada y es de Tipo \n" +  this.tipo2 );
       abierta = false;
     }
 

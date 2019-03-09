@@ -56,6 +56,28 @@ public class HelloWorld {
 		p1.cerrar();
 		estado_puerta(p1,p2);
 		System.out.println("Fin de las Instrucciones");
+		System.out.println("======================");
+		System.out.println("Siguiente Nivel");
+
+
+
+		/*Level 3 Radio */
+
+		System.out.println("======================");
+		System.out.println("Arrancando Radio......");
+		System.out.println("======================");
+		Radio flaix = new Radio("flaixFM");
+		Radio ViciusRadio = new Radio("vicious");
+		System.out.println("Nombre de la Radio:"+flaix.getNombre()+"&"+"."+ViciusRadio.getNombre());
+		System.out.println("Id único:"+flaix.getId());
+		System.out.println("Ruta Absoluta:"+flaix);
+		System.out.println("Número de Frequencia:"+flaix.getFrequencia());
+		System.out.println("Esta en Marcha:"+flaix.isOnline());
+
+
+
+
+		System.out.println("===================");
 
 	}
 

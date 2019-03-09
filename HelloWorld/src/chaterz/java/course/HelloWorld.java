@@ -68,8 +68,10 @@ public class HelloWorld {
 		System.out.println("======================");
 		Radio flaix = new Radio("flaixFM");
 		Radio ViciusRadio = new Radio("vicious");
-		System.out.println("Nombre de la Radio:"+flaix.getNombre()+"&"+"."+ViciusRadio.getNombre());
-		System.out.println("Id único:"+flaix.getId());
+		System.out.println("Nombre de las Radios:"+flaix.getNombre()+"&"+"."+ViciusRadio.getNombre());
+		System.out.println("Id " + flaix + ": " + flaix.getId());
+		System.out.println("Id " + ViciusRadio + ": " + ViciusRadio.getId());
+		
 		System.out.println("Ruta Absoluta:"+flaix);
 		System.out.println("Número de Frequencia:"+flaix.getFrequencia());
 		System.out.println("Esta en Marcha:"+flaix.isOnline());

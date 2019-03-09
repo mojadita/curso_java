@@ -9,7 +9,7 @@ public class Radio {
      * Bienvenido a Radio Show Time
      */
     /* Aqui defino la radio por Instancias */
-
+	
     /**
      * Id
      * Nombre
@@ -17,6 +17,7 @@ public class Radio {
      * Onda
      */
     public Radio(String name) {
+    	nombre = name;
         System.out.println("Creando la radio.....");
 
     }
@@ -52,9 +53,14 @@ public class Radio {
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
-    int id = 0;
+    static int next_id = 0;
+    int id = next_id++;
     double Frequencia = 106.1;
     String nombre ;
     boolean fm = true;
 
+    @Override
+    public String toString() {
+    	return nombre;
+    }
 }

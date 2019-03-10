@@ -1,24 +1,28 @@
 package course.java;
 
 public class Main {
+	public static void p(String s) {
+		System.out.println(s);
+	}
 	public static void main(String[] args) {
-		MultilevelTreeMap<String, Integer> map = new MultilevelTreeMap<String, Integer>();
-		for (int i = 0; i < args.length; i++) {
-			Integer contador = map.get(args[i]);
-			if (contador == null) 
-				contador = new Integer(0);
-			map.put(args[i], contador + 1);
-		}
-		System.out.println(map);
-
-		MultilevelTreeMap<String, Integer> map2 = new MultilevelTreeMap<String, Integer>();
-		args = new String[] { "paco", "alvaro", "tomas" };
-		for (int a = 0; a < args.length; a++){
-			Integer contador2 = map2.get(args[a]);
-			if (contador2 == null)
-				contador2 = new Integer(0);
-			map2.put(args[a], contador2 +1);
-		}
-		System.out.println(map2);
+		MultilevelTreeMap<String, Integer> map = new MultilevelTreeMap<String, Integer>(null);
+		MultilevelTreeMap<String, Integer> map_hijo = new MultilevelTreeMap<String, Integer>(map);
+		
+		map.put("pepe", 26);
+		map.put("juan", 23);
+		map.put("pio", 12);
+		map.put("pablo", 6);
+		map_hijo.put("pepito", 1);
+		map_hijo.put("juanito", 2);
+		map_hijo.put("pio", 8);
+		p("map.get(\"pio\")         <== " + map.get("pio"));
+		p("map.get(\"pablo\")       <== " + map.get("pablo"));
+		p("map.get(\"pepito\")      <== " + map.get("pepito"));
+		p("map_hijo.get(\"pepito\") <== " + map_hijo.get("pepito"));
+		p("map_hijo.get(\"pio\")    <== " + map_hijo.get("pio"));
+		p("map_hijo.get(\"alfonso\")<== " + map_hijo.get("alfonso"));
+		
+		
+		
 	} /* EnD Of tHe Main */
 }

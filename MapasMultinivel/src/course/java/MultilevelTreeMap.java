@@ -6,6 +6,45 @@ import java.util.TreeMap;
 public class MultilevelTreeMap<K, V> extends TreeMap<K, V> {
 
 	private static final long serialVersionUID = 4719639307781153135L;
+	
+	MultilevelTreeMap<K, V> m_parent;
+	
+	/**
+	 * This constructor is the unique contructor and requires to specify
+	 * @param parent
+	 */
+	public MultilevelTreeMap(MultilevelTreeMap<K, V> parent) {
+		m_parent = parent;
+	}
+	
+
+	/**
+	 * @return the parent map.
+	 */
+	public MultilevelTreeMap<K, V> getParent() {
+		return m_parent;
+	}
+
+
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(MultilevelTreeMap<K, V> parent) {
+		m_parent = parent;
+	}
+
+
+	/* (non-Javadoc)
+	 * @see java.util.TreeMap#get(java.lang.Object)
+	 */
+	@Override
+	public V get(Object clave_de_busqueda) {
+		V value = super.get(clave_de_busqueda); // lo buscamos en este mapa.
+		if (value == null && m_parent != null) // si no existe en este mapa && hay un parent
+			return m_parent.get(clave_de_busqueda);
+		return value;
+	}
+
 
 	@Override
 	public String toString() {

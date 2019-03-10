@@ -10,21 +10,15 @@ public class Main {
 			map.put(args[i], contador + 1);
 		}
 		System.out.println(map);
-/*
+
 		MultilevelTreeMap<String, Integer> map2 = new MultilevelTreeMap<String, Integer>();
-		for (int a = 0; a< args.length; a++){
-			//a = "paco","alvaro","tomas";
+		args = new String[] { "paco", "alvaro", "tomas" };
+		for (int a = 0; a < args.length; a++){
 			Integer contador2 = map2.get(args[a]);
 			if (contador2 == null)
-				contador2 == new Integer(0);
+				contador2 = new Integer(0);
 			map2.put(args[a], contador2 +1);
-
-
 		}
 		System.out.println(map2);
-
-*/
-
-
 	} /* EnD Of tHe Main */
 }

@@ -24,5 +24,7 @@ public class HelloWorld {
         print_state( b1, b2 );
         b1.encender();
         print_state( b1, b2 );
+        b1=null;
+        System.gc();
     }
 }

@@ -12,8 +12,8 @@ public class Bombilla {
 	public int precio;
 
 	public Bombilla(String name) {
-		System.out.println(super.toString() + ": acabo de ser creada");
-		m_name = name;
+        m_name = name;
+		System.out.println(toString() + ": acabo de ser creada");
 	}
 
 	/* métodos Staticos */

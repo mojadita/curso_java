@@ -16,8 +16,8 @@ public class TestMultilevelTreeMap {
     public static MultilevelTreeMap<String, Integer> map, map_hijo;
 	@Before
 	public void buildMap() {
-		map = new MultilevelTreeMap<String, Integer>(null);
-		map_hijo = new MultilevelTreeMap<String, Integer>(map);
+		map = new MultilevelTreeMap<String, Integer>(null, "pepito");
+		map_hijo = new MultilevelTreeMap<String, Integer>(map, "pepito");
 
 		map.put("pepe", 26);
 		map.put("juan", 23);

@@ -12,8 +12,8 @@ public class Main {
 	}
 
 	public static void main(String[] args) {
-		MultilevelTreeMap<String, Integer> map = new MultilevelTreeMap<String, Integer>(null);
-		MultilevelTreeMap<String, Integer> map_hijo = new MultilevelTreeMap<String, Integer>(map);
+		MultilevelTreeMap<String, Integer> map = new MultilevelTreeMap<String, Integer>(null, "map");
+		MultilevelTreeMap<String, Integer> map_hijo = new MultilevelTreeMap<String, Integer>(map, "map_hijo");
 		
 		map.put("pepe", 26);
 		map.put("juan", 23);
@@ -28,7 +28,9 @@ public class Main {
 		p("map_hijo.get(\"pepito\") <== " + map_hijo.get("pepito"));
 		p("map_hijo.get(\"pio\")    <== " + map_hijo.get("pio"));
 		p("map_hijo.get(\"alfonso\")<== " + map_hijo.get("alfonso"));
-		
+		map = null;
+		map_hijo = null;
+		System.gc();
 		
 		
 	} /* EnD Of tHe Main */

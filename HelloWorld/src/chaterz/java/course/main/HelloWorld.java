@@ -1,6 +1,9 @@
 
-package chaterz.java.course;
+package chaterz.java.course.main;
 
+import chaterz.java.course.Bombilla;
+import chaterz.java.course.Puerta;
+import chaterz.java.course.Radio;
 
 public class HelloWorld {
 	
@@ -61,7 +64,8 @@ public class HelloWorld {
 		System.out.println("======================");
 		System.out.println("Siguiente Nivel");
 
-
+		b1 = null;
+		System.gc();
 
 		/*Level 3 Radio */
 

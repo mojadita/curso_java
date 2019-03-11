@@ -1,4 +1,6 @@
+
 package chaterz.java.course;
+
 
 public class Bombilla {
 
@@ -53,9 +55,15 @@ public class Bombilla {
 		this.precio = precio;
 	}
 
+    @Override
+    protected void finalize() {
 
+        System.out.println( this + ": ooohhhhh, me están destruyendo!!!" );
+    }
 
-	public String toString() {
-		return "[" + m_name + "]";
-	}
+    @Override
+    public String toString() {
+
+        return "[" + m_name + "]";
+    }
 }

@@ -1,4 +1,6 @@
+
 package chaterz.java.course;
+
 
 public class HelloWorld {
 	
@@ -82,10 +84,5 @@ public class HelloWorld {
 		System.out.println("===================");
 
 	}
-
-
-
-
-
 
 }

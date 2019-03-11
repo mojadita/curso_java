@@ -4,6 +4,13 @@ public class Main {
 	public static void p(String s) {
 		System.out.println(s);
 	}
+
+	/* Otra anotación tipo ShortCut */
+
+	public static void a(String r) {
+		System.out.println(r);
+	}
+
 	public static void main(String[] args) {
 		MultilevelTreeMap<String, Integer> map = new MultilevelTreeMap<String, Integer>(null);
 		MultilevelTreeMap<String, Integer> map_hijo = new MultilevelTreeMap<String, Integer>(map);

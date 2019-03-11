@@ -2,19 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="bdb4b35e-645b-4165-9f3a-2c96950402a8" name="Default Changelist" comment="new_changes.">
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/compiler.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/uiDesigner.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/MapasMultinivel_Maven.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/src/main/java/Main2.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/src/main/java/ProductsMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/src/main/java/TonyMapa.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/course/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/course/java/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../MapasMultinivel_Maven/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,8 +40,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/course/java/MultilevelTreeMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="663">
-              <caret line="45" column="5" lean-forward="true" selection-start-line="39" selection-end-line="45" selection-end-column="5" />
+            <state relative-caret-position="578">
+              <caret line="40" column="44" lean-forward="true" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -130,7 +119,7 @@
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552266431220" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552266484738" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../MapasMultinivel_Maven" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -168,12 +157,12 @@
       <option name="presentableId" value="Default" />
       <updated>1552163559517</updated>
       <workItem from="1552163560756" duration="5666000" />
-      <workItem from="1552218438566" duration="4447000" />
+      <workItem from="1552218438566" duration="5091000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="10113000" />
+    <option name="totallyTimeSpent" value="10757000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -249,8 +238,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/course/java/MultilevelTreeMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="663">
-          <caret line="45" column="5" lean-forward="true" selection-start-line="39" selection-end-line="45" selection-end-column="5" />
+        <state relative-caret-position="578">
+          <caret line="40" column="44" lean-forward="true" selection-start-line="40" selection-start-column="44" selection-end-line="40" selection-end-column="44" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

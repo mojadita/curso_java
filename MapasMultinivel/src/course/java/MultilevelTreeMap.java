@@ -7,7 +7,7 @@ public class MultilevelTreeMap<K, V> extends TreeMap<K, V> {
 
 	private static final long serialVersionUID = 4719639307781153135L;
 	
-	MultilevelTreeMap<K, V> m_parent;
+	private MultilevelTreeMap<K, V> m_parent;
 	String m_name;
 	
 	/**

@@ -22,15 +22,16 @@ public class Main {
         Shape s = new Triangle();
         Shape s2 = new Circle();
         Integer i = new Integer(35);
-        doStuff(c);
-        doStuff(t);
+        doStuff(c); // <<< aquí se genera un objeto local a
+        doStuff(t); // <<< aquí se genera un objeto local a
         doStuff(l);
-        doStuff(s);
+        doStuff(s); // <<< aquí se genera un objeto local a
         //doStuff(i);
         doStuff2(t);
         //doStuff2(l);
         doStuff2((Triangle)s);
         //doStuff2(i);
-        doStuff2((Triangle)s2);
+        //doStuff2((Triangle)s2);  // esta es la que da la excepción.
+        System.gc(); // que son los que se liberan al llamar al garbage collector.
    }
 }

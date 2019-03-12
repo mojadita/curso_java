@@ -3,6 +3,7 @@ package curso.java;
 
 public abstract class Shape {
     public void a() {
+        Shape a = new Circle();
         System.out.println("Shape.a()");
     }
     public void b() {

@@ -1,7 +1,7 @@
 package curso.java;
 
 
-public class Shape {
+public abstract class Shape {
     public void a() {
         System.out.println("Shape.a()");
     }
@@ -12,4 +12,5 @@ public class Shape {
         System.out.println("Shape.c()");
     }
 
+    public abstract void draw();
 }

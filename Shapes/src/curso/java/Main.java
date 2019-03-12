@@ -5,6 +5,9 @@ public class Main {
     
     public static void doStuff(Shape s) {
         System.out.println(s);
+        s.a();
+        s.b();
+        s.c();
     }
 
     public static void main(String[] args) {

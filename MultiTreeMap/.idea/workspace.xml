@@ -2,21 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="4d1aa743-f290-4223-ab80-c571e19c7a91" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/../Shapes/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Shapes/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Shapes/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Shapes/Shapes.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Rectangle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MultiTreeMap/Main.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MultiTreeMap/Main.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MultiTreeMap/MultilevelTreeMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MultiTreeMap/MultilevelTreeMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/MultiTreeMap/TreeMapDemo.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/MultiTreeMap/TreeMapDemo.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shapes/src/curso/java/Circle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Circle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shapes/src/curso/java/Line.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Line.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/TreeMapDemo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/TreeMapDemo.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../Shapes/src/curso/java/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shapes/src/curso/java/Shape.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Shape.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../Shapes/src/curso/java/Triangle.java" beforeDir="false" afterPath="$PROJECT_DIR$/../Shapes/src/curso/java/Triangle.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -27,7 +14,7 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main.java">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="102">
@@ -40,11 +27,15 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/TreeMapDemo.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="425">
-              <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
+            <state relative-caret-position="166">
+              <caret line="43" column="82" selection-start-line="43" selection-start-column="82" selection-end-line="43" selection-end-column="82" />
+              <folding>
+                <element signature="e#188#204#0" expanded="true" />
+                <element signature="e#241#257#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -74,8 +65,8 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/MultilevelTreeMap.java" />
-        <option value="$PROJECT_DIR$/src/TreeMapDemo.java" />
         <option value="$PROJECT_DIR$/src/Main.java" />
+        <option value="$PROJECT_DIR$/src/TreeMapDemo.java" />
       </list>
     </option>
   </component>
@@ -118,7 +109,7 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552431028428" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1552433823205" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -173,18 +164,18 @@
       <option name="presentableId" value="Default" />
       <updated>1552168065059</updated>
       <workItem from="1552168068214" duration="3553000" />
-      <workItem from="1552413801165" duration="1683000" />
+      <workItem from="1552413801165" duration="3015000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="5236000" />
+    <option name="totallyTimeSpent" value="6568000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21268657" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21268657" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -193,8 +184,8 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.32936078" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3997833" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32936078" />
+      <window_info active="true" anchor="bottom" id="Debug" order="3" visible="true" weight="0.3997833" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
@@ -219,13 +210,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/TreeMapDemo.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="425">
-          <caret line="26" column="9" lean-forward="true" selection-start-line="26" selection-start-column="9" selection-end-line="26" selection-end-column="9" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/MultilevelTreeMap.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
@@ -240,6 +224,17 @@
           <folding>
             <element signature="e#158#175#0" expanded="true" />
             <element signature="e#259#276#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/TreeMapDemo.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="166">
+          <caret line="43" column="82" selection-start-line="43" selection-start-column="82" selection-end-line="43" selection-end-column="82" />
+          <folding>
+            <element signature="e#188#204#0" expanded="true" />
+            <element signature="e#241#257#0" expanded="true" />
           </folding>
         </state>
       </provider>

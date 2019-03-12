@@ -29,6 +29,7 @@ public class Main {
 
     public static void main(String[] args) { //el main es el corazón de la aplicación al desplegar empiza a ejecutarse desde aquí Ex: Línea 27!
         String Inicio = "SALUDOS";
+        String[] Milista = {"Rectangulo","Triangulo","Circulo","Line"};
         char uu0 = Inicio.charAt(0);
         char uu1 = Inicio.charAt(1);
         char uu2 = Inicio.charAt(2);
@@ -45,25 +46,48 @@ public class Main {
         System.out.println("======"+""+""+""+uu5);
         System.out.println("======="+""+""+""+uu6);
         System.out.println("===============");
+        System.out.println("Empezamos con Un...."+ Milista[2]);
         Circle c = new Circle();
         System.out.println("Soy un Círculo con el Siguiente Path ===>"+ c);
         //ademas dibujamos el círculo a boligrafo
         c.boli();
         System.out.println("===============");
+        System.out.println("Ahora con Un...."+ Milista[0]);
         Rectangle u = new Rectangle();
         u.rectanble();
         doStuff(u);
         System.out.println("===============");
+        System.out.println("Ahora con Un...."+ Milista[1]);
         Triangle t = new Triangle();
         t.triangle();
         doStuff(t);
         System.out.println("===============");
+        System.out.println("Y guardamos en la Chistera ...."+ Milista[3] +","+ Milista[1] + ","+ Milista[2]);
         Line l = new Line();
         doStuff(l);
         Shape s = new Triangle();
         Shape s2 = new Circle();
 
+/* ======================= Ejercicio Bucles ============*/
 
+        String[][] alphabet = {{"a","b","c","d","e"},
+                {"f","g","h","i","j"},
+                {"k","l","ll","m","n","o"},
+                {"p","q","r","s","t"},
+                {"u","v","w","x","y"},
+                {"z"}};
+        for (int i = 0; i< alphabet.length; i++) {
+            for (int j= 0; j < alphabet[i].length; j++){
+                System.out.println(alphabet[i][j]);
+            }
+        }
+
+
+
+
+
+
+        /* ==================Fin Ejercicio Bluckes =============*/
 
 
 

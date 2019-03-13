@@ -1,8 +1,5 @@
 package curso.java;
 
-
-import com.sun.istack.internal.NotNull;
-
 public class Main {
 
     public static void herencia1(Shape t) {
@@ -66,6 +63,7 @@ public class Main {
         Line l = new Line();
         doStuff(l);
         Shape s = new Triangle();
+        @SuppressWarnings( "unused" )
         Shape s2 = new Circle();
 
 /* ======================= Ejercicio Bucles ============*/
@@ -93,6 +91,7 @@ public class Main {
 
 
 
+        @SuppressWarnings( "unused" )
         Integer i = new Integer(35);
         doStuff(c); // <<< aquí se genera un objeto local a
         doStuff(t); // <<< aquí se genera un objeto local a

@@ -4,7 +4,7 @@ package curso.java;
 
 public class EratostenesArray {
 
-    public static final int N = 10000;
+    public static final int N = 10;
     
     
 

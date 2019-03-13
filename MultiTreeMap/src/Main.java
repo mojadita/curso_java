@@ -3,6 +3,10 @@ public class Main {
 
     public static void main( String[] args ) {
 
+
+        MultilevelTreeMap<String, Integer> map2 = new MultilevelTreeMap<String, Integer>();
+
+
         MultilevelTreeMap<String, Integer> map
                 = new MultilevelTreeMap<String, Integer>();
         map.put( "a", 23 );

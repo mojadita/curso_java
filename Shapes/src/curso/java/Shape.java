@@ -14,4 +14,6 @@ public abstract class Shape {
     }
 
     public abstract void draw();
+
+    public void t() { System.out.println("Este método viene directamente de la clase Shape es el método t()");}
 }

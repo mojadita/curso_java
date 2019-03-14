@@ -13,6 +13,7 @@ public class Matrices {
         /* Definimos la matriz */
         int almacenes[][] = new int[3][2];
         almacenes[0][0] = 25; // en el almacen 0 tenemos 25 productos señalado con el 0 == EnStock
+        almacenes[0][1] = 0;
         almacenes[1][1] = 5; // en el amacen 1 tenemos que faltan 5 productos, 1 == faltan, 0 ocupados.
         almacenes[1][0] = 20; // tenemos ocupado 20 productos
         almacenes[2][0] = 10; //Solo hay diez productos

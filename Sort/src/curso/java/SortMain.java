@@ -31,7 +31,7 @@ public class SortMain {
 
         int c;
         String line = "";
-        TreeSet<String> the_lines = new TreeSet<String>();
+        TreeSet<String> the_lines = new TreeSet<String>(); 
         while ( (c = in.read()) != -1 ) {
             switch ( c ) {
             case '\n':
@@ -41,13 +41,14 @@ public class SortMain {
                 break;
             default:
                 line += (char) c;
+                break;
             } // switch
         }
         if ( line.length() > 0 ) {
             the_lines.add( line );
         }
         for(String l: the_lines)
-            out.println(l);
+            out.println(">>> " + l);
     }
 
 }

@@ -28,6 +28,9 @@ public class SortMain2 {
     static class TheComparator implements Comparator<String> {
         @Override
         public int compare( String arg0, String arg1 ) {
+            int diff_lengths = arg0.length() - arg1.length();
+            if (diff_lengths != 0)
+                return diff_lengths;
             return arg0.compareTo( arg1 );
         }
     }

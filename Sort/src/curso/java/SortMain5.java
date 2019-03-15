@@ -50,6 +50,7 @@ public class SortMain5 {
         }
         
         the_lines.sort( String::compareTo );
+        
         for(String l: the_lines)
             out.println(l);
     }

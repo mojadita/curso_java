@@ -27,9 +27,13 @@ public class WordCountMain2 {
     /**
      * @param args
      */
-    public static void main( String[] args ) {
+
+    public static  void main(String[] args ) {
 
         try {
+             /*final String[] args1 = args;
+            String[] args2 = {"hello hola hola ho la hshshshsh hola \n hoasdla hasdkdod"};*/
+             String a = "hello mother";
             int char_read;
             long chars = 0, words = 0, lines = 0;
             boolean in_word = false;

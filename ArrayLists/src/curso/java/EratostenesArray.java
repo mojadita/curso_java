@@ -5,8 +5,6 @@ package curso.java;
 public class EratostenesArray {
 
     public static final int N = 10;
-    
-    
 
     public static void main( String[] args ) {
 
@@ -16,9 +14,9 @@ public class EratostenesArray {
                 continue;
             }
             // no hay marca, luego marcamos todos los multiplos.
-            for (int j = 2*i; j < N; j += i)
+            for ( int j = 2 * i; j < N; j += i )
                 array[j] = true;
-            System.out.println(i);
+            System.out.println( i );
         }
     }
 }

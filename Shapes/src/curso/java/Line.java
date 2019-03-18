@@ -1,12 +1,17 @@
+
 package curso.java;
 
 
-public class Line extends Shape  {
+public class Line extends Shape {
+
     public void a() {
-        System.out.println("Line.a()");
+
+        System.out.println( "Line.a()" );
     }
+
     public Line() {
-        System.out.println("Esto es construir una Linea.");
+
+        System.out.println( "Esto es construir una Linea." );
     }
 
 
@@ -14,7 +19,7 @@ public class Line extends Shape  {
     @Override
     public void draw() {
 
-        System.out.println("Drawing a Line");
+        System.out.println( "Drawing a Line" );
     }
-    
+
 }

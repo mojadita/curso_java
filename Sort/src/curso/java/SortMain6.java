@@ -13,8 +13,6 @@ package curso.java;
 import static java.lang.System.in;
 import static java.lang.System.out;
 
-import java.util.Comparator;
-import java.util.TreeSet;
 import java.util.Vector;
 
 
@@ -48,7 +46,7 @@ public class SortMain6 {
         if ( line.length() > 0 ) {
             the_lines.add( line );
         }
-        
+
         the_lines.sort( String::compareTo );
         the_lines.forEach( out::println );
     }

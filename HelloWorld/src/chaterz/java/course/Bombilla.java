@@ -4,56 +4,53 @@ package chaterz.java.course;
 
 public class Bombilla {
 
-	/* boolean no tiene get, al generar getter an setter solo genera setter ? */
+    /* boolean no tiene get, al generar getter an setter solo genera setter ? */
 
-	boolean encendido = false;
-	String m_name;
-	public String potencia;
-	public int precio;
+    boolean       encendido = false;
+    String        m_name;
+    public String potencia;
+    public int    precio;
 
-	public Bombilla(String name) {
+    public Bombilla( String name ) {
+
         m_name = name;
-		System.out.println(toString() + ": acabo de ser creada");
-	}
+        System.out.println( toString() + ": acabo de ser creada" );
+    }
 
-	/* métodos Staticos */
+    /* métodos Staticos */
 
-	public void encender() {
-		System.out.println(this + ": me han encendido");
-		encendido = true;
-	}
+    public void encender() {
 
-	public void apagar() {
-		System.out.println(this + ": me han apagado");
-		encendido = false;
-	}
+        System.out.println( this + ": me han encendido" );
+        encendido = true;
+    }
 
-	public boolean isEncendido() {
-		return encendido;
-	}
+    public void apagar() {
 
-	public void setEncendido(boolean encendido) {
-		this.encendido = encendido;
-	}
+        System.out.println( this + ": me han apagado" );
+        encendido = false;
+    }
+
+    public boolean isEncendido() { return encendido; }
+
+    public void setEncendido( boolean encendido ) {
+
+        this.encendido = encendido;
+    }
 
 
 
-	/* Getter and Setters */
-	public String getPotencia() {
-		return potencia;
-	}
+    /* Getter and Setters */
+    public String getPotencia() { return potencia; }
 
-	public void setPotencia(String potencia) {
-		this.potencia = potencia;
-	}
+    public void setPotencia( String potencia ) { this.potencia = potencia; }
 
-	public int getPrecio() {
-		return precio;
-	}
+    public int getPrecio() { return precio; }
 
-	public void setPrecio(int precio) { /* chaterz */
-		this.precio = precio;
-	}
+    public void setPrecio( int precio ) { /* chaterz */
+
+        this.precio = precio;
+    }
 
     @Override
     protected void finalize() {

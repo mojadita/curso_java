@@ -10,9 +10,9 @@
 package curso.java;
 
 
+import static java.lang.System.err;
 import static java.lang.System.in;
 import static java.lang.System.out;
-import static java.lang.System.err;
 
 import java.io.IOException;
 
@@ -28,26 +28,30 @@ public class WordCountMain2 {
      * @param args
      */
 
-    public static  void main(String[] args ) {
+    public static void main( String[] args ) {
 
         try {
-             /*final String[] args1 = args;
-            String[] args2 = {"hello hola hola ho la hshshshsh hola \n hoasdla hasdkdod"};*/
-             String a = "hello mother";
+            /*
+             * final String[] args1 = args;
+             * String[] args2 =
+             * {"hello hola hola ho la hshshshsh hola \n hoasdla hasdkdod"};
+             */
+            @SuppressWarnings( "unused" )
+            String a = "hello mother";
             int char_read;
             long chars = 0, words = 0, lines = 0;
             boolean in_word = false;
             while ( (char_read = in.read()) != -1 ) {
-                chars++;
+                chars++ ;
                 if ( char_read == '\n' ) {
-                    lines++;
+                    lines++ ;
                     in_word = false;
                 } else if ( (char_read >= 'a' && char_read <= 'z')
                         || (char_read >= 'A' && char_read <= 'Z')
                         || (char_read >= '0' && char_read <= '9') ) {
                     // dentro de palabra
                     if ( !in_word ) {
-                        words++;
+                        words++ ;
                         in_word = true;
                     }
                 } else {

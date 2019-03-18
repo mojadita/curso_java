@@ -14,7 +14,6 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.util.Comparator;
-import java.util.TreeSet;
 import java.util.Vector;
 
 
@@ -26,10 +25,12 @@ import java.util.Vector;
 public class SortMain2 {
 
     static class TheComparator implements Comparator<String> {
+
         @Override
         public int compare( String arg0, String arg1 ) {
+
             int diff_lengths = arg0.length() - arg1.length();
-            if (diff_lengths != 0)
+            if ( diff_lengths != 0 )
                 return diff_lengths;
             return arg0.compareTo( arg1 );
         }
@@ -59,7 +60,7 @@ public class SortMain2 {
             the_lines.add( line );
         }
         the_lines.sort( new TheComparator() );
-        for(String l: the_lines)
-            out.println(l);
+        for ( String l: the_lines )
+            out.println( l );
     }
 }

@@ -4,7 +4,8 @@ public class Main {
     public static void main( String[] args ) {
 
 
-        MultilevelTreeMap<String, Integer> map2 = new MultilevelTreeMap<String, Integer>();
+        MultilevelTreeMap<String, Integer> map2
+                = new MultilevelTreeMap<String, Integer>();
 
 
         MultilevelTreeMap<String, Integer> map
@@ -13,7 +14,7 @@ public class Main {
         map.put( "b", 2 );
         map.put( "c", 1 );
         map.put( "a", 56 );
-        
+
         for ( int i = 0; i < args.length; i++ ) {
 
             Integer contador = map.get( args[i] );

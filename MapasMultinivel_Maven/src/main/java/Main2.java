@@ -1,7 +1,3 @@
-import jdk.internal.org.objectweb.asm.tree.analysis.Value;
-
-
-
 public class Main2 {
 
     public static void p( String s ) {
@@ -55,8 +51,8 @@ public class Main2 {
         globo_hijo.put( "Carla Conquistadora", 0 );
         globo_hijo.put( "Rebeca Rodriguez", 0 );
         /* Consultamos en la cartera a ver que saldo tienen nuestros clientes */
-        b("Antonio Nicolau Batle", globo);
-        b("Rebeca Rodriguez", globo_hijo);
+        b( "Antonio Nicolau Batle", globo );
+        b( "Rebeca Rodriguez", globo_hijo );
 
         /*
          * globo.put("Agua",2);

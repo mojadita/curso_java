@@ -14,7 +14,6 @@ import static java.lang.System.in;
 import static java.lang.System.out;
 
 import java.util.Comparator;
-import java.util.TreeSet;
 import java.util.Vector;
 
 
@@ -48,16 +47,18 @@ public class SortMain3 {
         if ( line.length() > 0 ) {
             the_lines.add( line );
         }
-        
+
         Comparator<String> comp = new Comparator<String>() {
+
             @Override
             public int compare( String o1, String o2 ) {
+
                 return o1.compareTo( o2 );
             }
         };
-        
+
         the_lines.sort( comp );
-        for(String l: the_lines)
-            out.println(l);
+        for ( String l: the_lines )
+            out.println( l );
     }
 }

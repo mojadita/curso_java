@@ -15,7 +15,10 @@ import java.util.Iterator;
  */
 public class NuestraLista<E> implements Iterable<E> {
     final E[] m_losElementos;
-    
+   // final E[] m_items; No me deja crear otra lista
+
+   // public NuestraLista(int cap2) { m_items = (E[]) new Object()[cap2]; }
+
     private class Iter implements Iterator<E> {
         int m_index = 0;
         @Override

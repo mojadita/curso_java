@@ -52,7 +52,7 @@ public class Persona extends Thread {
 
     public String toString() {
 
-        return m_name;
+        return "D. " + m_name;
     }
 
     protected void delay( int max_msec ) {

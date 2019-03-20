@@ -37,7 +37,7 @@ public class Persona extends Thread {
     }
 
     public void say(String what) {
-        System.out.println("---[" + this + "]: " + what);
+        System.out.println("--<" + this + ">: " + what);
     }
     
     public String toString() {

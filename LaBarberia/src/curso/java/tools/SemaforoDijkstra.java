@@ -28,7 +28,7 @@ public class SemaforoDijkstra {
     public synchronized int down()
             throws InterruptedException {
 
-        if ( m_value == 0 )
+        while ( m_value == 0 )
             wait();
         return --m_value;
     }
@@ -36,7 +36,7 @@ public class SemaforoDijkstra {
     public synchronized int up() {
 
         int result = ++m_value;
-        notify();
+        notifyAll();
         return result;
     }
 

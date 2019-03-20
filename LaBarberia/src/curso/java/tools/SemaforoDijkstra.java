@@ -40,10 +40,10 @@ public class SemaforoDijkstra {
         return result;
     }
 
-    
+
     /**
      * @return the {@code int} {@code value}.
      */
     public synchronized int getValue() { return m_value; }
-    
+
 }

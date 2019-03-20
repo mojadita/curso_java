@@ -3,6 +3,8 @@ package curso.java;
 
 import java.util.Iterator;
 
+
+
 public abstract class OtherList2<E> implements Iterable<E> {
 
     final E[] items;
@@ -31,11 +33,12 @@ public abstract class OtherList2<E> implements Iterable<E> {
         return super.toString();
     }
     public static void main(String[] args) {
-
-        System.out.println(super.toString());
+System.out.println("Listas: ");
+        //start(javafx.stage.Stage);
+      /*  System.out.println(super.toString());
         System.out.println(items);
         items.getClass();
-
+*/
 
 
 

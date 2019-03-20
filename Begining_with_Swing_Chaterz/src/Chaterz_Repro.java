@@ -1,8 +1,13 @@
-import javax.swing.*;
-
-import static javafx.application.Application.launch;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextArea;
+import javax.swing.SwingUtilities;
 
 public class Chaterz_Repro extends JFrame {
+    
+    private static final long serialVersionUID = 7778086086048919023L;
     private JButton boton;
     static private final String newline = "\n";
     private static JButton openButton;
@@ -40,7 +45,6 @@ public class Chaterz_Repro extends JFrame {
                 chaterz();
             }
         });
-        launch(args);
     }
 
 

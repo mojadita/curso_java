@@ -40,7 +40,6 @@ public class Cliente extends Persona {
             m_myBarberia.salir( this );
             say("Que barbaridad, lo que hemos tardado, hasta otro día.  Toca morir. Fin");
         } catch ( InterruptedException e ) {
-            e.printStackTrace();
         }
     }
 }

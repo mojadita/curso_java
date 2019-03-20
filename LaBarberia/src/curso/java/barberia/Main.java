@@ -17,15 +17,15 @@ package curso.java.barberia;
 public class Main {
 
     public static String[] nombres = new String[] {
-        "D. Torcuato",
-        "D. Ginés",
-        "D. Alfredo",
-        "D. Jacinto",
-        "D. Felipe",
-        "D. Ambrosio",
-        "D. Zenón",
-        "D. Matías",
-        "Pepe",
+        "Abel", "Alberto", "Alfredo", "Álvaro", "Ambrosio", "Felipe",
+        "Francisco", "Gancedo", "Garcilaso", "Gilberto", "Ginés", "Gonzalo",
+        "Gregorio", "Gumersindo", "Jacinto", "Jacobo", "Jeremías", "Joaquín",
+        "José", "Juan", "Judas", "Julio", "Macario", "Mariano", "Marino",
+        "Matías", "Nabucodonosor", "Narciso", "Nemesio", "Nicolás", "Norberto",
+        "Pedro", "Porfirio", "Ramón", "Remigio", "Renato", "Roberto",
+        "Romualdo", "Rosendo", "Rubén", "Santiago", "Senén", "Sergio",
+        "Sisebuto", "Tadeo", "Tancredo", "Telesforo", "Titulcio", "Tomás",
+        "Torcuato", "Toribio", "Zenón",
     };
 
     /**
@@ -34,7 +34,7 @@ public class Main {
     public static void main( String[] args ) {
 
         Barberia barberia = new Barberia( "La Perla", 5 );
-        Barbero barbero = new Barbero( "Manolo", barberia );
+        Barbero barbero = new Barbero( "Manolo", barberia, nombres.length );
         barbero.start();
         for ( String name: nombres ) {
             Cliente cl = new Cliente( name, barberia );

@@ -43,16 +43,26 @@ public class Barberia {
     public void abrir( Barbero who ) {
 
         m_barbero = who;
-        m_barbero.say( "Abriendo la barberia" );
+        m_barbero.say( "Abriendo la barberia " + this );
         for ( int i = 0; i < m_aforo; i++ ) {
             m_semAforo.up();
         }
         m_barbero.say( "Barberia abierta" );
     }
 
+    public void cerrar( Barbero who ) throws InterruptedException {
+
+        m_barbero.say( "Cerrando la barbería " + this );
+        for ( int i = 0; i < m_aforo; i++ ) {
+            m_semAforo.down();
+        }
+        m_barbero.say( "Barbería " + this + " cerrada.  Vamos pa cacha." );
+        m_barbero = null;
+    }
+
     public void entrar( Cliente who ) throws InterruptedException {
 
-        who.say( "Entrando en la barbería, espero que me atiendan pronto.");
+        who.say( "Entrando en la barbería, espero que me atiendan pronto." );
         int aforo = m_semAforo.down();
         who.say( "Ya he entrado. El aforo es de " + aforo );
     }
@@ -70,14 +80,14 @@ public class Barberia {
         who.say( "Gracias barbero " + m_barbero
                 + ", me ha dejado como una patena" );
         m_enElSillon = null;
-        int aforo = m_semSillon.up();
-        who.say( "El aforo ha quedado en " + aforo );
+        m_semSillon.up();
     }
 
     public void salir( Cliente who ) {
 
         who.say( "Salgo de la barberia y me voy para casa, que ya está bien las horas que son" );
-        m_semAforo.up();
+        int aforo = m_semAforo.up();
+        who.say( "El aforo ha quedado en " + aforo );
     }
 
     /**
@@ -89,6 +99,7 @@ public class Barberia {
 
     @Override
     public String toString() {
+
         return m_nombre;
     }
 }

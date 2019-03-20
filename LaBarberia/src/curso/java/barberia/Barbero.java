@@ -37,7 +37,7 @@ public class Barbero extends Persona {
                 say("Vamos a atender al cliente " + elCliente + ", que quiere un corte de pelo");
                 delay(2000);
                 say("Señor " + elCliente + ", hermos acabado con usted, ya puede irse");
-                despierta( elCliente );
+                this.despiertaA( elCliente );
             }
             m_barberia.cerrar( this );
         } catch ( InterruptedException e ) {

@@ -38,7 +38,7 @@ public class Persona extends Thread {
         say( "Ainnssss... que bien he dormido." );
     }
 
-    public void despierta( Persona a_quien ) {
+    public void despiertaA( Persona a_quien ) {
 
         say( a_quien
                 + ", despierta ya, leche, que ya se han pasado las burras de la idem" );

@@ -9,57 +9,109 @@
 
 package curso.java.barberia;
 
-
 import java.util.Random;
 
 import curso.java.tools.SemaforoDijkstra;
 
-
-
 /**
+ * Clase que provee de funcionalidad básica a {@link Cliente}s y
+ * {@link Barbero}s.
+ * 
  * @author lcu
  *
  */
 public class Persona extends Thread {
 
-    protected static final Random  randomizer  = new Random();
-    private final String           m_name;
-    private final SemaforoDijkstra m_durmiendo = new SemaforoDijkstra( 0 );
+	protected static final Random randomizer = new Random();
+	private final String m_name;
+	private final VerboseSemDijkstra m_durmiendo = new VerboseSemDijkstra(0);
 
-    protected Persona( String name ) {
+	/**
+	 * Constructor único para {@link Persona}.
+	 * 
+	 * @param name el nombre de la persona.
+	 */
+	protected Persona(String name) {
 
-        m_name = name;
-    }
+		m_name = name;
+	}
 
-    public void aDormir() throws InterruptedException {
+	/**
+	 * Acción realizada por una {@link Persona} cuando se dispone a esperar un
+	 * evento que debe ser realizado por otra {@link Persona}.
+	 * 
+	 * @param onEntry Mensaje que dice la {@link Persona} al commienzo de la espera.
+	 * @param onExit  Mensaje que dirá la {@link Persona} cuando sea avisada de que
+	 *                la tarea realizada terminó. También se indicará el tiempo
+	 *                esperado.
+	 * @throws InterruptedException Si la {@link Persona} es interrumpida mientras
+	 *                              espera que la tarea acabe.
+	 */
+	public void aDormir(String onEntry, String onExit) throws InterruptedException {
 
-        say( "Aaaayyyy que sueño, me voy a dormir un rato. zzzzZZZZZzzzzzZZZZ" );
-        m_durmiendo.down();
-        say( "Ainnssss... que bien he dormido." );
-    }
+		m_durmiendo.down(this, onEntry, onExit);
+	}
 
-    public void despiertaA( Persona a_quien ) {
+	/**
+	 * Acción de despertar a alguien.
+	 * 
+	 * @param a_quien {@link Persona} a la que hay que despertar.
+	 * @param mensaje Mensaje que dice la {@link Persona} que despierta a la
+	 *                {@link Persona} que es despertada.
+	 */
+	public void despiertaA(Persona a_quien, String mensaje) {
 
-        say( a_quien
-                + ", despierta ya, leche, que ya se han pasado las burras de la idem" );
-        a_quien.m_durmiendo.up();
-    }
+		a_quien.m_durmiendo.up(this, a_quien, mensaje);
+	}
 
-    public void say( String what ) {
+	/**
+	 * Hasblar. Mensaje que una {@link Persona} dice para sí misma. No hay
+	 * interlocutor.
+	 * 
+	 * @param what Lo que se dice.
+	 */
+	public void say(String what) {
 
-        System.out.println( "--<" + this + ">: " + what );
-    }
+		System.out.println("--<" + this + ">: " + what);
+	}
 
-    public String toString() {
+	/**
+	 * Hablar. Mensaje que una {@link Persona} le dice a otra.
+	 * 
+	 * @param whom {@link Persona} a la que se dirige el mensaje.
+	 * @param what lo que se dice.
+	 */
+	public void say(Persona whom, String what) {
+		say("(a " + whom + "): " + what);
+	}
 
-        return "D. " + m_name;
-    }
+	@Override
+	public String toString() {
 
-    protected void delay( int max_msec ) {
+		return "D. " + m_name;
+	}
 
-        try {
-            Thread.sleep( randomizer.nextInt() & 0x7fffffff % max_msec );
-        } catch ( InterruptedException e ) {
-        }
-    }
+	/**
+	 * Acción de realizar una Tarea. La taréa durará un tiempo máximo de
+	 * {@code max_msec} y al comienzo se emitirá el mensaje {@code mensaje}. Al
+	 * finalizar se emite un mensaje fijo indicando la tarea terminada y el tiempo
+	 * que ha llevado la realizazión de la misma.
+	 * 
+	 * @param max_msec Duración máxima de la tarea. Milisegundos.
+	 * @param mensaje  Mensaje indicando el comienzo de la tarea.
+	 * @param tarea    Tarea a realizar.
+	 */
+	protected void tarea(int max_msec, String mensaje, String tarea) {
+
+		try {
+			say(String.format("%s  Comienza Tarea \"%s\".", mensaje, tarea));
+			long now = System.currentTimeMillis();
+			Thread.sleep(randomizer.nextInt() & 0x7fffffff % max_msec);
+			long elapsed = System.currentTimeMillis() - now;
+			say(String.format("Finaliza Tarea \"%s\".  (Duración/espera: %d.%03ds)", tarea, elapsed / 1000,
+					elapsed % 1000));
+		} catch (InterruptedException e) {
+			say("¡¡¡Vaya engorro!!!  Nos han interrumpido.");
+		}
+	}
 }

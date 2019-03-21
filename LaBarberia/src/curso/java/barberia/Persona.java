@@ -11,8 +11,6 @@ package curso.java.barberia;
 
 import java.util.Random;
 
-import curso.java.tools.SemaforoDijkstra;
-
 /**
  * Clase que provee de funcionalidad básica a {@link Cliente}s y
  * {@link Barbero}s.
@@ -106,7 +104,7 @@ public class Persona extends Thread {
 		try {
 			say(String.format("%s  Comienza Tarea \"%s\".", mensaje, tarea));
 			long now = System.currentTimeMillis();
-			Thread.sleep(randomizer.nextInt() & 0x7fffffff % max_msec);
+			Thread.sleep(randomizer.nextInt( max_msec ) );
 			long elapsed = System.currentTimeMillis() - now;
 			say(String.format("Finaliza Tarea \"%s\".  (Duración/espera: %d.%03ds)", tarea, elapsed / 1000,
 					elapsed % 1000));

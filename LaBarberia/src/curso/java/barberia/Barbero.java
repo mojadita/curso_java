@@ -49,9 +49,11 @@ public class Barbero extends Persona {
 				say("¡¡¡Vaya contratiempo!!! nos han interrumpido el sueñecito.");
 			}
 			Cliente elCliente = m_barberia.getCliente();
-			tarea(2000, "Vamos a atender al cliente " + elCliente + ", que quiere un corte de pelo",
-					"Señor " + elCliente + ", hermos acabado con usted, ya puede irse");
-			this.despiertaA(elCliente, "¡¡¡despierte, Leche!!! Que su corte de pelo está listo.");
+			String servicio = elCliente.getServicioRequerido();
+			tarea(2000, 
+					"Vamos a atender al cliente " + elCliente + ", que quiere un " + servicio,
+					servicio);
+			this.despiertaA(elCliente, "¡¡¡ " + elCliente + ", despierte leche!!! Que su " + servicio + " está listo.");
 		}
 		try {
 			m_barberia.cerrar(this);

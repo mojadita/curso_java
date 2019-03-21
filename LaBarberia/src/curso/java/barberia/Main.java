@@ -19,11 +19,12 @@ package curso.java.barberia;
 public class Main {
 
 	public static final String[] nombres = new String[] { "Abel", "Alberto", "Alfredo", "Álvaro", "Ambrosio", "Felipe",
-			"Francisco", "Gancedo", "Garcilaso", "Gilberto", "Ginés", "Gonzalo", "Gregorio", "Gumersindo", "Jacinto",
-			"Jacobo", "Jeremías", "Joaquín", "José", "Juan", "Judas", "Julio", "Macario", "Mariano", "Marino", "Matías",
-			"Nabucodonosor", "Narciso", "Nemesio", "Nicolás", "Norberto", "Pedro", "Porfirio", "Ramón", "Remigio",
-			"Renato", "Roberto", "Romualdo", "Rosendo", "Rubén", "Santiago", "Senén", "Sergio", "Sisebuto", "Tadeo",
-			"Tancredo", "Telesforo", "Titulcio", "Tomás", "Torcuato", "Toribio", "Zenón", };
+//			"Francisco", "Gancedo", "Garcilaso", "Gilberto", "Ginés", "Gonzalo", "Gregorio", "Gumersindo", "Jacinto",
+//			"Jacobo", "Jeremías", "Joaquín", "José", "Juan", "Judas", "Julio", "Macario", "Mariano", "Marino", "Matías",
+//			"Nabucodonosor", "Narciso", "Nemesio", "Nicolás", "Norberto", "Pedro", "Porfirio", "Ramón", "Remigio",
+//			"Renato", "Roberto", "Romualdo", "Rosendo", "Rubén", "Santiago", "Senén", "Sergio", "Sisebuto", "Tadeo",
+//			"Tancredo", "Telesforo", "Titulcio", "Tomás", "Torcuato", "Toribio", "Zenón", 
+	};
 
 	/**
 	 * @param args no usado de momento.

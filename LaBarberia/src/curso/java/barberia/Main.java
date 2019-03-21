@@ -17,7 +17,7 @@ package curso.java.barberia;
 public class Main {
 
     public static String[] nombres = new String[] {
-        "Abel", "Alberto", "Alfredo", "Álvaro", "Ambrosio", "Felipe",
+        "Abel", "Alberto", "Alfredo", "Álvaro"/*, "Ambrosio", "Felipe",
         "Francisco", "Gancedo", "Garcilaso", "Gilberto", "Ginés", "Gonzalo",
         "Gregorio", "Gumersindo", "Jacinto", "Jacobo", "Jeremías", "Joaquín",
         "José", "Juan", "Judas", "Julio", "Macario", "Mariano", "Marino",
@@ -25,7 +25,7 @@ public class Main {
         "Pedro", "Porfirio", "Ramón", "Remigio", "Renato", "Roberto",
         "Romualdo", "Rosendo", "Rubén", "Santiago", "Senén", "Sergio",
         "Sisebuto", "Tadeo", "Tancredo", "Telesforo", "Titulcio", "Tomás",
-        "Torcuato", "Toribio", "Zenón",
+        "Torcuato", "Toribio", "Zenón", */
     };
 
     /**

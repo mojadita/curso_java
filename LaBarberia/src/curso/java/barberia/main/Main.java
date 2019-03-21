@@ -7,7 +7,11 @@
  * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
  */
 
-package curso.java.barberia;
+package curso.java.barberia.main;
+
+import curso.java.barberia.Barberia;
+import curso.java.barberia.Barbero;
+import curso.java.barberia.Cliente;
 
 /**
  * Programa principal del programa sobre usos y costumbres en las

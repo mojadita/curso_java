@@ -10,29 +10,25 @@
 package curso.java.barberia;
 
 
-import curso.java.tools.SemaforoDijkstra;
-
-
-
 /**
  * @author lcu
  *
  */
 public class Barberia {
 
-    private final String           m_nombre;
-    private final int              m_aforo;
-    private final SemaforoDijkstra m_semAforo;
-    private final SemaforoDijkstra m_semSillon;
-    private Barbero                m_barbero;
-    private Cliente                m_enElSillon = null;
+    private final String             m_nombre;
+    private final int                m_aforo;
+    private final VerboseSemDijkstra m_semAforo;
+    private final VerboseSemDijkstra m_semSillon;
+    private Barbero                  m_barbero;
+    private Cliente                  m_enElSillon = null;
 
     public Barberia( String nombre, int aforo ) {
 
         m_nombre = nombre;
         m_aforo = aforo;
-        m_semAforo = new SemaforoDijkstra( 0 );
-        m_semSillon = new SemaforoDijkstra( 1 );
+        m_semAforo = new VerboseSemDijkstra( 0 );
+        m_semSillon = new VerboseSemDijkstra( 1 );
     }
 
     /**
@@ -40,66 +36,131 @@ public class Barberia {
      */
     public int getAforo() { return m_aforo; }
 
+    /**
+     * procedimiento de abrir la {@link Barberia}. Este procedimiento es llamado
+     * por
+     * el {@link Barbero} para realizar la apertura de la misma.
+     * 
+     * @param who referencia al {@link Barbero} que realiza la acción.
+     */
     public void abrir( Barbero who ) {
 
         m_barbero = who;
-        m_barbero.say( "Abriendo la barberia " + this );
+        who.say( "Abriendo la barberia " + this + "." );
         for ( int i = 0; i < m_aforo; i++ ) {
-            m_semAforo.up();
+            m_semAforo.up( who, "Aumentando el aforo un poco." );
         }
-        m_barbero.say( "Barberia abierta" );
+        who.say( String.format( "Barberia abierta.  Aforo fijado en %d.",
+                m_aforo ) );
     }
 
-    public void cerrar( Barbero who ) throws InterruptedException {
+    /**
+     * Acción de cerrar la {@link Barberia}. Este procedimiento es llamado por
+     * el
+     * {@link Persona} que cierra la {@link Barberia}. El parámetro {@code who}
+     * no
+     * debería ser necesario, ya que el {@link Barbero} que abre la barbería
+     * normalmente es el mismo que la cierra después y está almacenado en la
+     * misma.
+     * Por flexibilidad se incluye (permitir que otro {@link Barbero} sea quien
+     * cierre la {@link Barberia})
+     * 
+     * @param who {@link Barbero} que realiza la acción de cerrar la
+     *            {@link Barberia}
+     * @throws InterruptedException Si es interrumpido mientras espera la bajada
+     *                              del
+     *                              aforo.
+     */
+    public void cerrar( Persona who ) throws InterruptedException {
 
-        m_barbero.say( "Cerrando la barbería " + this );
+        who.say( "Cerrando la barbería " + this );
         for ( int i = 0; i < m_aforo; i++ ) {
-            m_semAforo.down();
+            m_semAforo.down( who, "Bajando aforo", "Aforo bajado" );
         }
-        m_barbero.say( "Barbería " + this + " cerrada.  Vamos pa cacha." );
+        m_barbero.say( this + " cerrada.  Vamos pa cacha." );
         m_barbero = null;
     }
 
+    /**
+     * Acción de entrar en la {@link Barberia}.
+     * 
+     * @param who Quien realiza la acción de entrar en la {@link Barberia}. Debe
+     *            ser
+     *            un {@link Cliente}.
+     * @throws InterruptedException Si mientras espera para entrar, el
+     *                              {@link Thread} es interrumpido.
+     */
     public void entrar( Cliente who ) throws InterruptedException {
 
-        who.say( "Entrando en la barbería, espero que me atiendan pronto." );
-        int aforo = m_semAforo.down();
-        who.say( "Ya he entrado. El aforo es de " + aforo );
+        int aforo = m_semAforo.down( who,
+                m_semAforo.getValue() == 0
+                        ? "Aforo completo, nos tocará esperar"
+                        : "Entrando en la barbería",
+                "¡¡¡Dentro!!!" );
+        who.say( "El aforo es de " + aforo );
     }
 
+    /**
+     * Acción de ir a sentarse en el sillón del {@link Barbero}.
+     * 
+     * @param who Quién realiza la acción. Debe ser un {@link Cliente}.
+     * @throws InterruptedException Si mientras espera para ocupar el sillón del
+     *                              {@link Barbero} el proceso es interrumpido.
+     */
     public void ocuparSillon( Cliente who ) throws InterruptedException {
 
-        who.say( "Voy a sentarme en el Sillon, para que me atiendan" );
-        m_semSillon.down();
-        who.say( "Ya me he sentado, que rollo de espera." );
+        m_semSillon.down( who,
+                "Voy a sentarme en el sillón para que me atiendan.",
+                "Sentado.  ¡Qué rollo de espera!" );
         m_enElSillon = who;
     }
 
+    /**
+     * Acción de levantarse del sillón del {@link Barbero} y que resulta en la
+     * liberación de éste.
+     * 
+     * @param who Quién realiza la acción. Este parámetro no sería necesario,
+     *            pues
+     *            el {@link Cliente} que realiza la acción está registrado en la
+     *            {@link Barberia}, mientras ocupa el sillón del
+     *            {@link Barbero}.
+     */
     public void desocuparSillon( Cliente who ) {
 
-        who.say( "Gracias barbero " + m_barbero
-                + ", me ha dejado como una patena" );
+        m_semSillon.up( who, m_barbero,
+                "¡¡Gracias!!  Me ha dejado como una patena." );
         m_enElSillon = null;
-        m_semSillon.up();
     }
 
+    /**
+     * Acción de salir de la {@link Barberia}. El {@link Cliente} que sale es el
+     * especificado como parámetro.
+     * 
+     * @param who El {@link Cliente} que sale de la {@link Barberia}.
+     */
     public void salir( Cliente who ) {
 
-        who.say( "Salgo de la barberia y me voy para casa, que ya está bien las horas que son" );
-        int aforo = m_semAforo.up();
+        int aforo = m_semAforo.up( who,
+                "Salgo de la barberia y me voy para casa, que ya está bien las horas que son" );
         who.say( "El aforo ha quedado en " + aforo );
     }
 
     /**
-     * @return the {@code Barbero} {@code dueño}.
+     * @return el {@code Barbero} {@code dueño}, que opera esta
+     *         {@link Barberia}.
      */
     public Barbero getDueño() { return m_barbero; }
 
+    /**
+     * @return el {@link Cliente} que está actualmente sentado en el sillón del
+     *         {@link Barbero}, o {@code null} en caso de que no haya nadie
+     *         sentado.
+     */
     public Cliente getCliente() { return m_enElSillon; }
 
     @Override
     public String toString() {
 
-        return m_nombre;
+        return "Barbería \"" + m_nombre + "\"";
     }
 }

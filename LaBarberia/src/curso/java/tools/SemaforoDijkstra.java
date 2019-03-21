@@ -9,34 +9,68 @@
 
 package curso.java.tools;
 
-
 /**
+ * Implementación de un Semáforo de Dijkstra en Java.
+ * 
+ * La intención de esta clase es realizar semáforos con espera bloqueada al
+ * estilo de los utilizados por Edsger W. Dijkstra en su trabajos sobre
+ * computación distribuida.
+ * 
  * @author lcu
  *
  */
 public class SemaforoDijkstra {
 
-    private int m_value;
+	private int m_value;
 
-    public SemaforoDijkstra( int initial ) {
+	/**
+	 * Constructor único con un valor inicial.
+	 * 
+	 * @param initial valor inicial que toma el semáforo al comienzo.
+	 */
+	public SemaforoDijkstra(int initial) {
 
-        if ( initial < 0 )
-            throw new IllegalArgumentException( "valor ilegal: " + initial );
-        m_value = initial;
-    }
+		if (initial < 0)
+			throw new IllegalArgumentException("valor ilegal: " + initial);
+		m_value = initial;
+	}
 
-    public synchronized int down()
-            throws InterruptedException {
+	/**
+	 * Acción de esperar sobre el {@link SemaforoDijkstra} para conseguir acceso al
+	 * recurso compartido. El valor del semáforo debe ser positivo ( > 0 ) para que
+	 * el acceso sea permitido. En caso de que el semáforo sea cero, el proceso (y
+	 * los que lleguen después) serán bloqueados esperando a que el semáforo obtenga
+	 * un valor positivo.
+	 * 
+	 * @return el valor del semáforo que queda una vez obtenido el recurso.
+	 * @throws InterruptedException si durante la espera se produce una interrupción
+	 *                              debido a una señal.
+	 */
+	public synchronized int down() throws InterruptedException {
 
-        while ( m_value == 0 )
-            wait();
-        return --m_value;
-    }
+		while (m_value == 0)
+			wait();
+		return --m_value;
+	}
 
-    public synchronized int up() {
+	/**
+	 * Acción de liberar el semáforo, se produce un incremento del mismo y se
+	 * despierta a todos los procesos que esperan sobre el mismo a fin de que tengan
+	 * oportunidad de acceder.
+	 * 
+	 * @return El valor resultante de la liberación de un recurso.
+	 */
+	public synchronized int up() {
 
-        int result = ++m_value;
-        notifyAll();
-        return result;
-    }
+		int result = ++m_value;
+		notifyAll();
+		return result;
+	}
+
+	/**
+	 * @return el valor instantáneo actual del semáforo.
+	 */
+	public synchronized int getValue() {
+		return m_value;
+	}
 }

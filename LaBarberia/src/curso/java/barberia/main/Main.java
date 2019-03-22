@@ -20,7 +20,7 @@ import curso.java.barberia.Cliente;
  * @author lcu
  *
  */
-public class Main {
+public abstract class Main {
 
 	/**
 	 * Aforo maximo que se permitira en la {@link Barberia} del programa.
@@ -47,6 +47,8 @@ public class Main {
 			"Nabucodonosor", "Narciso", "Nemesio", "Nicolás", "Norberto", "Pedro", "Porfirio", "Ramón", "Remigio",
 			"Renato", "Roberto", "Romualdo", "Rosendo", "Rubén", "Santiago", "Senén", "Sergio", "Sisebuto", "Tadeo",
 			"Tancredo", "Telesforo", "Titulcio", "Tomás", "Torcuato", "Toribio", "Zenón", };
+	
+	private Main() {}
 
 	/**
 	 * @param args no usado de momento.

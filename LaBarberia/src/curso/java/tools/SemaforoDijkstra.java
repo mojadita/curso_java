@@ -37,7 +37,7 @@ public class SemaforoDijkstra {
 
 	/**
 	 * Acción de esperar sobre el {@link SemaforoDijkstra} para conseguir acceso al
-	 * recurso compartido. El valor del semáforo debe ser positivo ( > 0 ) para que
+	 * recurso compartido. El valor del semáforo debe ser positivo ( &gt; 0 ) para que
 	 * el acceso sea permitido. En caso de que el semáforo sea cero, el proceso (y
 	 * los que lleguen después) serán bloqueados esperando a que el semáforo obtenga
 	 * un valor positivo.

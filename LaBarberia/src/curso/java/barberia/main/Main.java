@@ -51,7 +51,7 @@ public abstract class Main {
 	private Main() {}
 
 	/**
-	 * @param args no usado de momento.
+	 * @param args nombres de los {@link Cliente}s.  Cada argumento representa el nombre de un {@link Cliente}
 	 */
 	public static void main(String[] args) {
 

@@ -11,6 +11,26 @@ package curso.java.barberia;
 
 
 /**
+ * La {@link Barberia} es el lugar donde van los {@link Cliente}s a ser atendidos por el {@link Barbero}.
+ * La {@link Barberia} tiene un {@link Barberia#m_nombre}, que es aquel con el que es conocida, a ella se
+ * asocia un {@link Barbero}, que es quien realiza servicios en ella, y acuden {@link Cliente}s para
+ * realizarse esos servicios.  La {@link Barberia} tiene un {@link Barberia#getAforo()} que es el número
+ * maximo de {@link Cliente}s que pueden entrar, incluyeno al que está en el sillón del {@link Barbero}.
+ * 
+ * Los {@link Cliente}s que exceden el aforo tienen que esperar fuera a que salgan {@link Cliente}s para
+ * poder entrar.
+ * 
+ * Del mismo modo, solo un {@link Cliente} puede ser atendido por el {@link Barbero}, de forma que
+ * solamente un {@link Cliente} puede ocupar el sillon.  Cuando esto ocurre, el método 
+ * {@link Barberia#getCliente()} nos permite averiguar qué {@link Cliente} es el que está sentado en el
+ * sillón del {@link Barbero}.
+ * 
+ * La {@link Barberia} inicialmente está cerrada, hecho que se indica porque el aforo permitido está
+ * fijado en cero.  Cuando el barbero {@link Barberia#abrir(Barbero)} la barbería, se aumenta el aforo
+ * hasta el maximo indicado en el campo {@link Barberia#m_aforo}.  Cuando el {@link Barbero} se va de la
+ * {@link Barberia} debe dejarla cerrada, para lo cual debe ir reduciendo el aforo (para esto debe esperar
+ * que este pueda reducirse, con la marcha de los {@link Cliente}s.)
+ * 
  * @author lcu
  *
  */
@@ -23,6 +43,13 @@ public class Barberia {
     private Barbero                  m_barbero;
     private Cliente                  m_enElSillon = null;
 
+    /**
+     * Constructor único para la {@link Barberia}.  Se proporciona un nombre para la misma, así como
+     * el aforo máximo.
+     * 
+     * @param nombre el nombre que recibe la {@link Barberia}.
+     * @param aforo el aforo maximo que soporta esta {@link Barberia}.
+     */
     public Barberia( String nombre, int aforo ) {
 
         m_nombre = nombre;

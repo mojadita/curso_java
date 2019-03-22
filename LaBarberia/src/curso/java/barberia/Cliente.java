@@ -21,6 +21,11 @@ public class Cliente extends Persona {
     private Barberia m_myBarberia;
     private String   m_servicioRequerido;
 
+    /**
+     * Diferentes servicios que un {@link Cliente} puede solicitar.  Se seleccionan
+     * de una manera aleatoria al crear el {@link Cliente} y se acceden a traves del
+     * método {@link Cliente#getServicioRequerido()}.
+     */
     private static final String[] servicios = new String[] {
         "afeitado", "corte de pelo", "lavado",
         "extracción de una muela", "peinado", "cuidado de uñas",

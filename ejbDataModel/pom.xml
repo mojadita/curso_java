@@ -36,6 +36,13 @@
 			<version>1.3</version>
 			<scope>test</scope>
 		</dependency>
-
+		<!-- https://mvnrepository.com/artifact/org.wildfly/wildfly-feature-pack -->
+		<dependency>
+			<groupId>org.wildfly</groupId>
+			<artifactId>wildfly-feature-pack</artifactId>
+			<version>16.0.0.Final</version>
+			<type>pom</type>
+			<scope>provided</scope>
+		</dependency>
 	</dependencies>
 </project>

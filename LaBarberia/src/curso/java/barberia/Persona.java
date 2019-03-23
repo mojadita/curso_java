@@ -1,18 +1,12 @@
-/*
- * Name: Persona.java
+/* Name: Persona.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 16:24:29
  * Project: LaBarberia
  * Package: curso.java.barberia
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
-
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 package curso.java.barberia;
 
-
 import java.util.Random;
-
-
 
 /**
  * Clase que provee de funcionalidad básica a {@link Cliente}s y
@@ -23,7 +17,7 @@ import java.util.Random;
  */
 public class Persona extends Thread {
 
-    protected static final Random    randomizer  = new Random();
+    protected final Random           randomizer  = new Random();
     private final String             m_name;
     private final VerboseSemDijkstra m_durmiendo = new VerboseSemDijkstra( 0 );
 
@@ -33,7 +27,6 @@ public class Persona extends Thread {
      * @param name el nombre de la persona.
      */
     protected Persona( String name ) {
-
         m_name = name;
     }
 
@@ -41,19 +34,21 @@ public class Persona extends Thread {
      * Acción realizada por una {@link Persona} cuando se dispone a esperar un
      * evento que debe ser realizado por otra {@link Persona}.
      * 
-     * @param onEntry Mensaje que dice la {@link Persona} al commienzo de la
-     *                espera.
-     * @param onExit  Mensaje que dirá la {@link Persona} cuando sea avisada de
-     *                que
-     *                la tarea realizada terminó. También se indicará el tiempo
-     *                esperado.
+     * @param  onEntry              Mensaje que dice la {@link Persona} al
+     *                              commienzo de la
+     *                              espera.
+     * @param  onExit               Mensaje que dirá la {@link Persona} cuando
+     *                              sea avisada de
+     *                              que
+     *                              la tarea realizada terminó. También se
+     *                              indicará el tiempo
+     *                              esperado.
      * @throws InterruptedException Si la {@link Persona} es interrumpida
      *                              mientras
      *                              espera que la tarea acabe.
      */
     public void aDormir( String onEntry, String onExit )
             throws InterruptedException {
-
         m_durmiendo.down( this, onEntry, onExit );
     }
 
@@ -65,18 +60,16 @@ public class Persona extends Thread {
      *                {@link Persona} que es despertada.
      */
     public void despiertaA( Persona a_quien, String mensaje ) {
-
         a_quien.m_durmiendo.up( this, a_quien, mensaje );
     }
 
     /**
-     * Hasblar. Mensaje que una {@link Persona} dice para sí misma. No hay
+     * Hablar. Mensaje que una {@link Persona} dice para sí misma. No hay
      * interlocutor.
      * 
      * @param what Lo que se dice.
      */
     public void say( String what ) {
-
         System.out.println( "--<" + this + ">: " + what );
     }
 
@@ -87,13 +80,11 @@ public class Persona extends Thread {
      * @param what lo que se dice.
      */
     public void say( Persona whom, String what ) {
-
         say( "(a " + whom + "): " + what );
     }
 
     @Override
     public String toString() {
-
         return "D." + m_name;
     }
 
@@ -109,7 +100,6 @@ public class Persona extends Thread {
      * @param tarea    Tarea a realizar.
      */
     protected void tarea( int max_msec, String mensaje, String tarea ) {
-
         try {
             say( String.format( "%s  Comienza Tarea \"%s\".", mensaje,
                     tarea ) );
@@ -118,8 +108,7 @@ public class Persona extends Thread {
             long elapsed = System.currentTimeMillis() - now;
             say( String.format(
                     "Finaliza Tarea \"%s\".  (Duración/espera: %d.%03ds)",
-                    tarea, elapsed / 1000,
-                    elapsed % 1000 ) );
+                    tarea, elapsed / 1000, elapsed % 1000 ) );
         } catch ( InterruptedException e ) {
             say( "¡¡¡Vaya engorro!!!  Nos han interrumpido." );
         }

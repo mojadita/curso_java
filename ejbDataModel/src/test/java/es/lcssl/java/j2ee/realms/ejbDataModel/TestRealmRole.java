@@ -35,13 +35,13 @@ public class TestRealmRole {
     @Test
     public void testId() {
         iut.setId( 0x123456789abcdef0L );
-        assertEquals( 0x123456789abcdefL, iut.getId() );
+        assertEquals( 0x123456789abcdef0L, iut.getId() );
     }
 
     @Test
     public void testName() {
         iut.setName( "test_realm" );
-        assertEquals( "Test_Realm", iut.getName() );
+        assertEquals( "test_realm", iut.getName() );
     }
 
     @Test

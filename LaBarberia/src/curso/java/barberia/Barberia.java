@@ -1,14 +1,10 @@
-/*
- * Name: Barberia.java
+/* Name: Barberia.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 15:58:42
  * Project: LaBarberia
  * Package: curso.java.barberia
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
-
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 package curso.java.barberia;
-
 
 /**
  * @author lcu
@@ -23,31 +19,40 @@ public class Barberia {
     private Barbero                  m_barbero;
     private Cliente                  m_enElSillon = null;
 
+    /**
+     * Constructor único. Se asigna {@code nombre} y {@code aforo} a la misma.
+     * 
+     * @param nombre es el nombre ({@link String}) que tomará la
+     *               {@link Barberia}.
+     * @param aforo  es el número de {@link Cliente}s que pueden estar en la
+     *               {@link Barberia}, incluyendo
+     *               el que está siendo atendido en el sillón del
+     *               {@link Barbero}.
+     */
     public Barberia( String nombre, int aforo ) {
-
-        m_nombre = nombre;
-        m_aforo = aforo;
-        m_semAforo = new VerboseSemDijkstra( 0 );
+        m_nombre    = nombre;
+        m_aforo     = aforo;
+        m_semAforo  = new VerboseSemDijkstra( 0 );
         m_semSillon = new VerboseSemDijkstra( 1 );
     }
 
     /**
      * @return the {@code int} {@code aforo}.
      */
-    public int getAforo() { return m_aforo; }
+    public int getAforo() {
+        return m_aforo;
+    }
 
     /**
      * procedimiento de abrir la {@link Barberia}. Este procedimiento es llamado
-     * por
-     * el {@link Barbero} para realizar la apertura de la misma.
+     * por el {@link Barbero} para realizar la apertura de la misma.
      * 
      * @param who referencia al {@link Barbero} que realiza la acción.
      */
     public void abrir( Barbero who ) {
-
         m_barbero = who;
         who.say( "Abriendo la barberia " + this + "." );
-        for ( int i = 0; i < m_aforo; i++ ) {
+        for ( int i = 0 ; i < m_aforo ; i++ ) {
             m_semAforo.up( who, "Aumentando el aforo un poco." );
         }
         who.say( String.format( "Barberia abierta.  Aforo fijado en %d.",
@@ -56,25 +61,24 @@ public class Barberia {
 
     /**
      * Acción de cerrar la {@link Barberia}. Este procedimiento es llamado por
-     * el
-     * {@link Persona} que cierra la {@link Barberia}. El parámetro {@code who}
-     * no
-     * debería ser necesario, ya que el {@link Barbero} que abre la barbería
+     * el {@link Persona} que cierra la {@link Barberia}. El parámetro
+     * {@code who}
+     * no debería ser necesario, ya que el {@link Barbero} que abre la barbería
      * normalmente es el mismo que la cierra después y está almacenado en la
-     * misma.
-     * Por flexibilidad se incluye (permitir que otro {@link Barbero} sea quien
+     * misma. Por flexibilidad se incluye (permitir que otro {@link Barbero} sea
+     * quien
      * cierre la {@link Barberia})
      * 
-     * @param who {@link Barbero} que realiza la acción de cerrar la
-     *            {@link Barberia}
+     * @param  who                  {@link Barbero} que realiza la acción de
+     *                              cerrar la
+     *                              {@link Barberia}
      * @throws InterruptedException Si es interrumpido mientras espera la bajada
      *                              del
      *                              aforo.
      */
     public void cerrar( Persona who ) throws InterruptedException {
-
         who.say( "Cerrando la barbería " + this );
-        for ( int i = 0; i < m_aforo; i++ ) {
+        for ( int i = 0 ; i < m_aforo ; i++ ) {
             m_semAforo.down( who, "Bajando aforo", "Aforo bajado" );
         }
         m_barbero.say( this + " cerrada.  Vamos pa cacha." );
@@ -84,14 +88,14 @@ public class Barberia {
     /**
      * Acción de entrar en la {@link Barberia}.
      * 
-     * @param who Quien realiza la acción de entrar en la {@link Barberia}. Debe
-     *            ser
-     *            un {@link Cliente}.
+     * @param  who                  Quien realiza la acción de entrar en la
+     *                              {@link Barberia}. Debe
+     *                              ser
+     *                              un {@link Cliente}.
      * @throws InterruptedException Si mientras espera para entrar, el
      *                              {@link Thread} es interrumpido.
      */
     public void entrar( Cliente who ) throws InterruptedException {
-
         int aforo = m_semAforo.down( who,
                 m_semAforo.getValue() == 0
                         ? "Aforo completo, nos tocará esperar"
@@ -103,7 +107,8 @@ public class Barberia {
     /**
      * Acción de ir a sentarse en el sillón del {@link Barbero}.
      * 
-     * @param who Quién realiza la acción. Debe ser un {@link Cliente}.
+     * @param  who                  Quién realiza la acción. Debe ser un
+     *                              {@link Cliente}.
      * @throws InterruptedException Si mientras espera para ocupar el sillón del
      *                              {@link Barbero} el proceso es interrumpido.
      */
@@ -140,8 +145,8 @@ public class Barberia {
      */
     public void salir( Cliente who ) {
 
-        int aforo = m_semAforo.up( who,
-                "Salgo de la barberia y me voy para casa, que ya está bien las horas que son" );
+        int aforo = m_semAforo.up( who, "Salgo de la barberia y me "
+                + "voy para casa, que ya está bien las horas que son" );
         who.say( "El aforo ha quedado en " + aforo );
     }
 
@@ -149,14 +154,18 @@ public class Barberia {
      * @return el {@code Barbero} {@code dueño}, que opera esta
      *         {@link Barberia}.
      */
-    public Barbero getDueño() { return m_barbero; }
+    public Barbero getDueño() {
+        return m_barbero;
+    }
 
     /**
      * @return el {@link Cliente} que está actualmente sentado en el sillón del
      *         {@link Barbero}, o {@code null} en caso de que no haya nadie
      *         sentado.
      */
-    public Cliente getCliente() { return m_enElSillon; }
+    public Cliente getCliente() {
+        return m_enElSillon;
+    }
 
     @Override
     public String toString() {

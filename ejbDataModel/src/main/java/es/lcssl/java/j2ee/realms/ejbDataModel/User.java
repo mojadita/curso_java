@@ -7,6 +7,7 @@
 package es.lcssl.java.j2ee.realms.ejbDataModel;
 
 import java.sql.Date;
+import java.util.regex.Pattern;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

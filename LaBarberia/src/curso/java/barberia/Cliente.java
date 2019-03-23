@@ -1,19 +1,15 @@
-/*
- * Name: Cliente.java
+/* Name: Cliente.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 16:38:41
  * Project: LaBarberia
  * Package: curso.java.barberia
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
-
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 package curso.java.barberia;
-
 
 /**
  * Clase representando a un {@link Cliente} de la {@link Barberia}.
  * 
- * @author lcu
+ * @author Luis Colorado {@code <luiscoloradourcola@gmail.com>}
  *
  */
 public class Cliente extends Persona {
@@ -21,10 +17,9 @@ public class Cliente extends Persona {
     private Barberia m_myBarberia;
     private String   m_servicioRequerido;
 
-    private static final String[] servicios = new String[] {
-        "afeitado", "corte de pelo", "lavado",
-        "extracción de una muela", "peinado", "cuidado de uñas",
-        "cuidado de piés",
+    private static final String[] servicios = new String[] { "afeitado",
+        "corte de pelo", "lavado", "extracción de una muela", "peinado",
+        "cuidado de uñas", "cuidado de piés",
     };
 
     /**
@@ -35,15 +30,14 @@ public class Cliente extends Persona {
      *                {@link Cliente}.
      */
     public Cliente( String name, Barberia a_donde ) {
-
         super( name );
-        m_myBarberia = a_donde;
-        m_servicioRequerido = servicios[randomizer.nextInt( servicios.length )];
+        m_myBarberia        = a_donde;
+        m_servicioRequerido = servicios[ randomizer
+                .nextInt( servicios.length ) ];
     }
 
     @Override
     public void run() {
-
         try {
             tarea( 2000, "Hola amigos, buenos días.  Salgo de casa a comprar.",
                     "COMPRAS" );
@@ -64,13 +58,14 @@ public class Cliente extends Persona {
             m_myBarberia.salir( this );
             say( "¡¡¡Que barbaridad!!!  Lo que hemos tardado.  Hasta otro día.  Toca morir.  Fin." );
         } catch ( InterruptedException e ) {
-            say("¡¡¡Mierda!!!  Me han interrumpido.  Me voy a casa.");;
+            say( "¡¡¡Mierda!!!  Me han interrumpido.  Me voy a casa." );;
         }
     }
 
     /**
      * @return el servicio requerido al {@link Barbero}.
      */
-    public String getServicioRequerido() { return m_servicioRequerido; }
-
+    public String getServicioRequerido() {
+        return m_servicioRequerido;
+    }
 }

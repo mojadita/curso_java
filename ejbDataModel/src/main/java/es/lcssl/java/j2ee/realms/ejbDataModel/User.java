@@ -13,8 +13,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import org.opensaml.saml.saml2.metadata.EmailAddress;
-
 /**
  * This class implements a {@link User} for the realms database.
  * 

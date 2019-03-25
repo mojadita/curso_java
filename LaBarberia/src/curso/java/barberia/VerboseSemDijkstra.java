@@ -29,7 +29,7 @@ public class VerboseSemDijkstra extends SemaforoDijkstra {
 	}
 
 	/**
-	 * Realiza una operación {@link SemaforoDijkstra#down()} ilustrándola con un
+	 * Realiza una operación {@link SemaforoDijkstra#down(int)} ilustrándola con un
 	 * mensaje al comienzo de la misma, realizado por una {@link Persona} y con un
 	 * mensaje al finalizar la espera. Se indicará también el tiempo requerido en la
 	 * espera.
@@ -52,8 +52,8 @@ public class VerboseSemDijkstra extends SemaforoDijkstra {
 	}
 
 	/**
-	 * Realiza una operación {@link SemaforoDijkstra#up()} ilustrándola con mensajes
-	 * originados por la {@link Persona} que realiza la llamada.
+	 * Realiza una operación {@link SemaforoDijkstra#up(int)} ilustrándola con
+	 * mensajes originados por la {@link Persona} que realiza la llamada.
 	 * 
 	 * @param who     que {@link Persona} realiza la acción.
 	 * @param whom    a qué {@link Persona} va dirigida la acción. Lo que se dice va
@@ -80,5 +80,21 @@ public class VerboseSemDijkstra extends SemaforoDijkstra {
 	public int up(Persona who, String message) {
 		who.say(message);
 		return super.up();
+	}
+
+	/**
+	 * Acción de {@link SemaforoDijkstra#up(int)} ilustrada con mensajes.
+	 * 
+	 * @param who     qué {@link Persona} realiza la acción.
+	 * @param n_res   número de recursos que se proveen.
+	 * @param message lo que dice la {@link Persona} cuando ha realizado la acción.
+	 *                No hay destinatario del mensaje, por tanto no es un mensaje
+	 *                dirigido a alguien en concreto.
+	 * @return el valor ajustado en el {@link SemaforoDijkstra} tras la ejecución de
+	 *         este método.
+	 */
+	public int up(Persona who, int n_res, String message) {
+		who.say(message);
+		return super.up(n_res);
 	}
 }

@@ -16,12 +16,14 @@ import java.util.Random;
 
 /**
  * Clase que provee de funcionalidad básica a {@link Cliente}s y
- * {@link Barbero}s.
+ * {@link Barbero}s.  La clase se declara {@code abstract} a fin de que no pueda
+ * ser instanciada. El constructor es {@code protected} a fin de qeu solo pueda
+ * ser llamado desde subclases de esta clase.
  * 
  * @author lcu
  *
  */
-public class Persona extends Thread {
+public abstract class Persona extends Thread {
 
     protected static final Random    randomizer  = new Random();
     private final String             m_name;

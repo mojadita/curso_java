@@ -1,12 +1,9 @@
-/*
- * Name: Barberia.java
+/* Name: Barberia.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 15:58:42
  * Project: LaBarberia
  * Package: curso.java.barberia
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
-
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 package curso.java.barberia;
 
 /**
@@ -47,27 +44,29 @@ public class Barberia {
 	private Barbero m_barbero;
 	private Cliente m_enElSillon = null;
 
-	/**
-	 * Constructor único para la {@link Barberia}. Se proporciona un nombre para la
-	 * misma, así como el aforo máximo.
-	 * 
-	 * @param nombre el nombre que recibe la {@link Barberia}.
-	 * @param aforo  el aforo maximo que soporta esta {@link Barberia}.
-	 */
-	public Barberia(String nombre, int aforo) {
+    /**
+     * Constructor único. Se asigna {@code nombre} y {@code aforo} a la misma.
+     * 
+     * @param nombre es el nombre ({@link String}) que tomará la
+     *               {@link Barberia}.
+     * @param aforo  es el número de {@link Cliente}s que pueden estar en la
+     *               {@link Barberia}, incluyendo
+     *               el que está siendo atendido en el sillón del
+     *               {@link Barbero}.
+     */
+    public Barberia( String nombre, int aforo ) {
+        m_nombre    = nombre;
+        m_aforo     = aforo;
+        m_semAforo  = new VerboseSemDijkstra( 0 );
+        m_semSillon = new VerboseSemDijkstra( 1 );
+    }
 
-		m_nombre = nombre;
-		m_aforo = aforo;
-		m_semAforo = new VerboseSemDijkstra(0);
-		m_semSillon = new VerboseSemDijkstra(1);
-	}
-
-	/**
-	 * @return the {@code int} {@code aforo}.
-	 */
-	public int getAforo() {
-		return m_aforo;
-	}
+    /**
+     * @return the {@code int} {@code aforo}.
+     */
+    public int getAforo() {
+        return m_aforo;
+    }
 
 	/**
 	 * procedimiento de abrir la {@link Barberia}. Este procedimiento es llamado por
@@ -122,14 +121,15 @@ public class Barberia {
 		who.say("El aforo ha quedado en " + aforo);
 	}
 
-	/**
-	 * Acción de ir a sentarse en el sillón del {@link Barbero}.
-	 * 
-	 * @param who Quién realiza la acción. Debe ser un {@link Cliente}.
-	 * @throws InterruptedException Si mientras espera para ocupar el sillón del
-	 *                              {@link Barbero} el proceso es interrumpido.
-	 */
-	public void ocuparSillon(Cliente who) throws InterruptedException {
+    /**
+     * Acción de ir a sentarse en el sillón del {@link Barbero}.
+     * 
+     * @param  who                  Quién realiza la acción. Debe ser un
+     *                              {@link Cliente}.
+     * @throws InterruptedException Si mientras espera para ocupar el sillón del
+     *                              {@link Barbero} el proceso es interrumpido.
+     */
+    public void ocuparSillon( Cliente who ) throws InterruptedException {
 
 		m_semSillon.down(who, "Voy a sentarme en el sillón para que me atiendan.", "Sentado.  ¡Qué rollo de espera!");
 		m_enElSillon = who;
@@ -161,20 +161,22 @@ public class Barberia {
 		who.say("El aforo ha quedado en " + aforo);
 	}
 
-	/**
-	 * @return el {@code Barbero} {@code dueño}, que opera esta {@link Barberia}.
-	 */
-	public Barbero getDueño() {
-		return m_barbero;
-	}
+    /**
+     * @return el {@code Barbero} {@code dueño}, que opera esta
+     *         {@link Barberia}.
+     */
+    public Barbero getDueño() {
+        return m_barbero;
+    }
 
-	/**
-	 * @return el {@link Cliente} que está actualmente sentado en el sillón del
-	 *         {@link Barbero}, o {@code null} en caso de que no haya nadie sentado.
-	 */
-	public Cliente getCliente() {
-		return m_enElSillon;
-	}
+    /**
+     * @return el {@link Cliente} que está actualmente sentado en el sillón del
+     *         {@link Barbero}, o {@code null} en caso de que no haya nadie
+     *         sentado.
+     */
+    public Cliente getCliente() {
+        return m_enElSillon;
+    }
 
 	@Override
 	public String toString() {

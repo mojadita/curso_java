@@ -1,11 +1,9 @@
-/*
- * Name: VerboseSemDijkstra.java
+/* Name: VerboseSEmDijkstra.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
- * Date: 21 mar. 2019 08:41:35
+ * Date: 20 mar. 2019 16:24:29
  * Project: LaBarberia
  * Package: curso.java.barberia
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 package curso.java.barberia;
 
 import curso.java.tools.SemaforoDijkstra;
@@ -21,7 +19,7 @@ import curso.java.tools.SemaforoDijkstra;
 public class VerboseSemDijkstra extends SemaforoDijkstra {
 
 	/**
-	 * @param initial el valor inicial para el semáforo.
+	 * @param initial valor inicial para asignar al semáforo.
 	 * @see SemaforoDijkstra#SemaforoDijkstra(int)
 	 */
 	public VerboseSemDijkstra(int initial) {
@@ -62,7 +60,6 @@ public class VerboseSemDijkstra extends SemaforoDijkstra {
 	 * @return el valor del {@link SemaforoDijkstra} una vez realizada la acción.
 	 */
 	public int up(Persona who, Persona whom, String message) {
-
 		who.say(whom, message);
 		return super.up();
 	}

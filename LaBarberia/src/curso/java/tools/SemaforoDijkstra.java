@@ -1,11 +1,9 @@
-/*
- * Name: SemaforoDijkstra.java
+/* Name: SemaforoDijkstra.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 15:43:54
  * Project: LaBarberia
  * Package: curso.java.tools
- * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
- */
+ * Copyright: (C) 2019 LUIS COLORADO. All rights reserved. */
 
 package curso.java.tools;
 
@@ -21,19 +19,18 @@ package curso.java.tools;
  */
 public class SemaforoDijkstra {
 
-	private int m_value;
+    private int m_value;
 
-	/**
-	 * Constructor único con un valor inicial.
-	 * 
-	 * @param initial valor inicial que toma el semáforo al comienzo.
-	 */
-	public SemaforoDijkstra(int initial) {
-
-		if (initial < 0)
-			throw new IllegalArgumentException("valor ilegal: " + initial);
-		m_value = initial;
-	}
+    /**
+     * Constructor único con un valor inicial.
+     * 
+     * @param initial valor inicial que toma el semáforo al comienzo.
+     */
+    public SemaforoDijkstra( int initial ) {
+        if ( initial < 0 )
+            throw new IllegalArgumentException( "valor ilegal: " + initial );
+        m_value = initial;
+    }
 
 	/**
 	 * Acción de esperar sobre el {@link SemaforoDijkstra} para conseguir acceso al

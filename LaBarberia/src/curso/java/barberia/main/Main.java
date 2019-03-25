@@ -1,12 +1,10 @@
-/*
- * Name: Main.java
+/* Name: Main.java
  * Author: Luis Colorado <luiscoloradourcola@gmail.com>
  * Date: 20 mar. 2019 17:38:28
  * Project: LaBarberia
  * Package: curso.java.barberia.main
  * Copyright: (C) 2019 LUIS COLORADO. All rights reserved.
  */
-
 package curso.java.barberia.main;
 
 import curso.java.barberia.Barberia;

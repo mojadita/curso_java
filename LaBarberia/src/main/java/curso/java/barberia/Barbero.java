@@ -77,7 +77,7 @@ public class Barbero extends Persona {
 
             tarea( 2000, "Vamos a atender al cliente " + elCliente
                     + ", que quiere un " + servicio, servicio );
-            this.despiertaA( elCliente,
+            elCliente.despierta( this,
                     "¡¡¡ " + elCliente + ", despierte leche!!! Que su "
                             + servicio + " está listo." );
         }

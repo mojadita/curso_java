@@ -49,7 +49,7 @@ public class Cliente extends Persona {
             m_myBarberia.entrar( this );
             m_myBarberia.ocuparSillon( this );
             Barbero b = m_myBarberia.getDueño();
-            despiertaA( b, "¡¡¡Eh barbero " + b
+            b.despierta( this, "¡¡¡Eh barbero " + b
                     + "!!!, ya estoy listo para que me haga un " + s + "." );
             aDormir( "Mientras me hacen un " + s + " leeré algunas revistas.",
                     "Bueno, gracias Sr. " + b

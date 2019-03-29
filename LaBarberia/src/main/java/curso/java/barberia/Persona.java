@@ -73,8 +73,8 @@ public abstract class Persona extends Thread {
      * @param mensaje Mensaje que dice la {@link Persona} que despierta a la
      *                {@link Persona} que es despertada.
      */
-    public void despiertaA( Persona a_quien, String mensaje ) {
-        a_quien.m_durmiendo.up( this, a_quien, mensaje );
+    public void despierta( Persona who, String mensaje ) {
+        m_durmiendo.up( who, this, mensaje );
     }
 
     /**

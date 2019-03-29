@@ -1,6 +1,4 @@
 *.class
-<<<<<<< HEAD
 /.metadata/
-=======
 .metadata
->>>>>>> refs/remotes/origin/ACC
+RemoteSystemsTempFiles

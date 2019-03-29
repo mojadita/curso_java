@@ -41,6 +41,30 @@ public class TestUser {
     public void testName() {
         assertEquals( "root", iut.getName() );
     }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testFailName() {
+        @SuppressWarnings( "unused" )
+        User iut = new UserBuilder().setName( "9ramon" ).build();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testFailNameWithUnderscore() {
+        @SuppressWarnings( "unused" )
+        User iut = new UserBuilder().setName( "_ramon" ).build();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testFailNameWithTwoDashes() {
+        @SuppressWarnings( "unused" )
+        User iut = new UserBuilder().setName( "ra--mon" ).build();
+    }
+    
+    @Test(expected=IllegalArgumentException.class)
+    public void testFailNameWithDashAtEnd() {
+        @SuppressWarnings( "unused" )
+        User iut = new UserBuilder().setName( "ra-mon-" ).build();
+    }
 
     @Test
     public void testEmail() {

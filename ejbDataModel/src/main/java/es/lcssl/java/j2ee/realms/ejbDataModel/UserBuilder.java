@@ -20,6 +20,9 @@ public class UserBuilder {
     private User m_target = new User();
     
     public UserBuilder setName(String name) {
+        if (!name.matches( "[a-zA-Z](-?[a-zA-Z0-9])*" )) {
+            throw new IllegalArgumentException("Illegal name for a user: " + name);
+        }
         m_target.setName( name );
         return this;
     }

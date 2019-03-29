@@ -39,6 +39,26 @@ public class Barbero extends Persona {
         m_servicios = servicios;
     }
 
+    /**
+     * Constructor para realización de tests de unidad. Provee como extra el
+     * {@link VerboseSemDijkstra} que se emplea para sincronizar las esperas, a
+     * fin de hacer Mock del mismo.
+     * 
+     * @param name      Nombre del {@link Barbero}.
+     * @param barberia  referencia de la {@link Barberia} donde actuará este
+     *                  {@link Barbero}.
+     * @param servicios número total de servicios que realizará el barbero.
+     * @param sem       {@link VerboseSemDijkstra} empleado para sincronización.
+     *                  Se hace Mock de este semáforo a fin de simular las
+     *                  operaciones realizadas por los clientes.
+     */
+    Barbero( String name, Barberia barberia, int servicios,
+            VerboseSemDijkstra sem ) {
+        super( name, sem );
+        m_barberia  = barberia;
+        m_servicios = servicios;
+    }
+
     @Override
     public void run() {
         say( "Hola amigos, soy el barbero, voy a abrir la " + m_barberia );

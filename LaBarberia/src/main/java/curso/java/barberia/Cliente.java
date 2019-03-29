@@ -36,6 +36,21 @@ public class Cliente extends Persona {
                 .nextInt( servicios.length ) ];
     }
 
+    /**
+     * Constructor visible al paquete, solo para tests de unidad. Se incluye una
+     * referencia al semaforo a fin de permitir hacer mocking.
+     * 
+     * @param name    Nombre del {@link Cliente}.
+     * @param a_donde {@link Barberia} a la que se dirigirá el {@link Cliente}.
+     * @param sem     {@link VerboseSemDijkstra} empleado en la sincronización.
+     */
+    Cliente( String name, Barberia a_donde, VerboseSemDijkstra sem ) {
+        super( name, sem );
+        m_myBarberia        = a_donde;
+        m_servicioRequerido = servicios[ randomizer
+                .nextInt( servicios.length ) ];
+    }
+
     @Override
     public void run() {
         try {
@@ -51,7 +66,7 @@ public class Cliente extends Persona {
             Barbero b = m_myBarberia.getDueño();
             b.despierta( this, "¡¡¡Eh barbero " + b
                     + "!!!, ya estoy listo para que me haga un " + s + "." );
-            aDormir( "Mientras me hacen un " + s + " leeré algunas revistas.",
+            duerme( "Mientras me hacen un " + s + " leeré algunas revistas.",
                     "Bueno, gracias Sr. " + b
                             + ", sin duda alguna ha hecho un trabajo extraordinario." );
             m_myBarberia.desocuparSillon( this );

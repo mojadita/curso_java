@@ -65,7 +65,7 @@ public class Barbero extends Persona {
         m_barberia.abrir( this );
         while ( m_servicios-- > 0 ) {
             try {
-                aDormir( "Aaaayyyy que sueño, me voy a dormir un rato. "
+                duerme( "Aaaayyyy que sueño, me voy a dormir un rato. "
                         + "zzzzZZZZZzzzzzZZZZ",
                         "Ainnssss... que bien he dormido." );
             } catch ( InterruptedException e ) {

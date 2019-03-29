@@ -61,7 +61,7 @@ public abstract class Persona extends Thread {
      *                              mientras
      *                              espera que la tarea acabe.
      */
-    public void aDormir( String onEntry, String onExit )
+    public void duerme( String onEntry, String onExit )
             throws InterruptedException {
         m_durmiendo.down( this, onEntry, onExit );
     }

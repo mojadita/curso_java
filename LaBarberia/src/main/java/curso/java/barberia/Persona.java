@@ -10,7 +10,7 @@ import java.util.Random;
 
 /**
  * Clase que provee de funcionalidad básica a {@link Cliente}s y
- * {@link Barbero}s.  La clase se declara {@code abstract} a fin de que no pueda
+ * {@link Barbero}s. La clase se declara {@code abstract} a fin de que no pueda
  * ser instanciada. El constructor es {@code protected} a fin de qeu solo pueda
  * ser llamado desde subclases de esta clase.
  * 
@@ -19,9 +19,9 @@ import java.util.Random;
  */
 public abstract class Persona extends Thread {
 
-    protected final Random           randomizer  = new Random();
+    protected final Random           randomizer = new Random();
     private final String             m_name;
-    private final VerboseSemDijkstra m_durmiendo = new VerboseSemDijkstra( 0 );
+    private final VerboseSemDijkstra m_durmiendo;
 
     /**
      * Constructor único para {@link Persona}.
@@ -29,7 +29,19 @@ public abstract class Persona extends Thread {
      * @param name el nombre de la persona.
      */
     protected Persona( String name ) {
-        m_name = name;
+        m_name      = name;
+        m_durmiendo = new VerboseSemDijkstra( 0 );
+    }
+
+    /**
+     * Constructor para realizar tests de unidad.
+     * 
+     * @param name el nombre de la {@link Persona}.
+     * @param sem  el semáforo que emplea cuando espera que le despierten.
+     */
+    Persona( String name, VerboseSemDijkstra sem ) {
+        m_name      = name;
+        m_durmiendo = sem;
     }
 
     /**
@@ -49,7 +61,7 @@ public abstract class Persona extends Thread {
      *                              mientras
      *                              espera que la tarea acabe.
      */
-    public void aDormir( String onEntry, String onExit )
+    public void duerme( String onEntry, String onExit )
             throws InterruptedException {
         m_durmiendo.down( this, onEntry, onExit );
     }
@@ -61,8 +73,8 @@ public abstract class Persona extends Thread {
      * @param mensaje Mensaje que dice la {@link Persona} que despierta a la
      *                {@link Persona} que es despertada.
      */
-    public void despiertaA( Persona a_quien, String mensaje ) {
-        a_quien.m_durmiendo.up( this, a_quien, mensaje );
+    public void despierta( Persona who, String mensaje ) {
+        m_durmiendo.up( who, this, mensaje );
     }
 
     /**

@@ -50,13 +50,29 @@ public class ChessBoardPrinter {
          * instead.
          *  
          */
+        int lin, col;
+        for ( lin = 0 ; lin < size ; lin++ ) {
+            /* first line */
+            for ( col = 0 ; col < size ; col++ )
+                out.append( lin == 0 ? "+===" : "+---" );
+            out.append( "+\n" );
+            for ( int row = 0 ; row < 2 ; row++ ) {
+                for ( col = 0 ; col < size ; col++ )
+                    out.append( (lin + col) % 2 == 0 ? "|###" : "|   " );
+                out.append( "|\n" );
+            }
+        }
+        for (col = 0; col < size; col++)
+            out.append( "+===" );
+        out.append( "+\n" );
     }
 
     /**
-     * Main program.  Don't touch anything here.
+     * Main program. Don't touch anything here.
+     * 
      * @param args You can specify a single argument specifying the
-     * number of cells the size of the board has.  If you pass more
-     * arguments than one, the rest are ignored.
+     *             number of cells the size of the board has. If you pass more
+     *             arguments than one, the rest are ignored.
      */
     public static void main( String[] args ) {
         int size = DEFAULT_SIZE;

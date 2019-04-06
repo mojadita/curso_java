@@ -1,12 +1,12 @@
-/*      Name: MazeGenerator.java
- *    Author: Luis Colorado <luiscoloradourcola@gmail.com>
- *      Date: 6 abr. 2019 21:19:42
- *   Project: maze
- *   Package: curso.java.maze
- * Copyright: (C) 2019 Luis Colorado.  All rights reserved.
- */
+/* Name: MazeGenerator.java
+ * Author: Luis Colorado <luiscoloradourcola@gmail.com>
+ * Date: 6 abr. 2019 21:19:42
+ * Project: maze
+ * Package: curso.java.maze
+ * Copyright: (C) 2019 Luis Colorado. All rights reserved. */
 package curso.java.maze;
 
+import java.util.Random;
 
 /**
  * Maze generator.
@@ -17,14 +17,16 @@ package curso.java.maze;
 public class MazeGenerator {
 
     /**
-     * Main program.  Generates a maze and prints it.
+     * Main program. Generates a maze and prints it.
+     * 
      * @param args
      */
     public static void main( String[] args ) {
-        Maze maze = new Maze();
-        maze.init( 8, 8 );
-        maze.build( 3, 4 );
-        System.out.println(maze);
+        Maze   maze = new Maze();
+        Random r    = new Random();
+        maze.init( 20, 30 );
+        maze.build( r.nextInt( 20 ), r.nextInt( 30 ) );
+        System.out.println( maze );
     }
 
 }

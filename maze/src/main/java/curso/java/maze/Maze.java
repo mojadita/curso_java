@@ -21,7 +21,26 @@ public class Maze {
     public static final byte MARKED_CELL = (1 << 4);
     public static final byte ALL_WALLS   = NORTH_WALL | EAST_WALL | SOUTH_WALL
             | WEST_WALL;
-    public static final int  CELL_ROWS   = 2;
+    public static final int  CELL_ROWS   = 1;
+
+    static final int[][] table = new int[][] { //
+        /*    0 */ new int[] { 1, 2, 4, 8
+        }, /* 1 */ new int[] { 3, 5, 9
+        }, /* 2 */ new int[] { 3, 6, 10
+        }, /* 3 */ new int[] { 7, 11
+        }, /* 4 */ new int[] { 5, 6, 12
+        }, /* 5 */ new int[] { 7, 13
+        }, /* 6 */ new int[] { 7, 14
+        }, /* 7 */ new int[] { 15
+        }, /* 8 */ new int[] { 9, 10, 12
+        }, /* 9 */ new int[] { 11, 13
+        }, /*10 */ new int[] { 11, 14
+        }, /*11 */ new int[] { 15
+        }, /*12 */ new int[] { 13, 14
+        }, /*13 */ new int[] { 15
+        }, /*14 */ new int[] { 15
+        }, /*15 */ null,
+    };
 
     private byte[][] cells;
     private int      m_rows, m_cols;
@@ -46,74 +65,74 @@ public class Maze {
         }
     }
 
+    private void checkPos( String from, int row, int col ) {
+        int state = 0;
+        while ( table[ state ] != null ) {
+            int next = table[ state ][m_random.nextInt( table[ state ].length )];
+            int bit  = state ^ next;
+            if ( (bit & NORTH_WALL) != 0 ) checkNorth( row, col );
+            if ( (bit & EAST_WALL) != 0 ) checkEast( row, col );
+            if ( (bit & SOUTH_WALL) != 0 ) checkSouth( row, col );
+            if ( (bit & WEST_WALL) != 0 ) checkWest( row, col );
+            //System.out.println( String.format( "%s: %d -> %d", from, state, next ) );
+            state = next;
+        }
+
+    }
+
     public void build( int row, int col ) {
         cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
-        checkNorth( row, col );
-        checkEast( row, col );
-        checkSouth( row, col );
-        checkWest( row, col );
+        checkPos( "build", row, col );
     }
 
     private void checkNorth( int row, int col ) {
         if ( row == 0 || (cells[ row - 1 ][ col ] & MARKED_CELL) != 0
-                || m_toVisit == 0 || m_random.nextBoolean() )
+                || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        
-        cells[row][col] &= ~NORTH_WALL;
+
+        cells[ row ][ col ] &= ~NORTH_WALL;
         row-- ;
-        cells[row][col] &= ~SOUTH_WALL;
+        cells[ row ][ col ] &= ~SOUTH_WALL;
         cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
-        checkNorth( row, col );
-        checkEast( row, col );
-        checkSouth( row, col );
-        checkWest( row, col );
+        checkPos( "checkNorth", row, col );
     }
 
     private void checkEast( int row, int col ) {
         if ( col + 1 == m_cols || (cells[ row ][ col + 1 ] & MARKED_CELL) != 0
-                || m_toVisit == 0 || m_random.nextBoolean() )
+                || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[row][col] &= ~EAST_WALL;
+        cells[ row ][ col ] &= ~EAST_WALL;
         col++ ;
-        cells[row][col] &= ~WEST_WALL;
+        cells[ row ][ col ] &= ~WEST_WALL;
         cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
-        checkNorth( row, col );
-        checkEast( row, col );
-        checkSouth( row, col );
-        checkWest( row, col );
+        checkPos( "checkEast", row, col );
     }
 
     private void checkSouth( int row, int col ) {
         if ( row + 1 == m_rows || (cells[ row + 1 ][ col ] & MARKED_CELL) != 0
-                || m_toVisit == 0 || m_random.nextBoolean() )
+                || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[row][col] &= ~SOUTH_WALL;
+        cells[ row ][ col ] &= ~SOUTH_WALL;
         row++ ;
-        cells[row][col] &= ~NORTH_WALL;
+        cells[ row ][ col ] &= ~NORTH_WALL;
         cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
-        checkNorth( row, col );
-        checkEast( row, col );
-        checkSouth( row, col );
-        checkWest( row, col );
+        checkPos( "checkSouth", row, col );
     }
 
     private void checkWest( int row, int col ) {
         if ( col == 0 || (cells[ row ][ col - 1 ] & MARKED_CELL) != 0
-                || m_toVisit == 0 || m_random.nextBoolean() )
+                || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[row][col] &= ~WEST_WALL;
+        cells[ row ][ col ] &= ~WEST_WALL;
         col-- ;
-        cells[row][col] &= ~EAST_WALL;
+        cells[ row ][ col ] &= ~EAST_WALL;
         cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
-        checkNorth( row, col );
-        checkEast( row, col );
-        checkSouth( row, col );
-        checkWest( row, col );
+        checkPos( "checkWest", row, col );
     }
 
 
@@ -140,4 +159,5 @@ public class Maze {
         sb.append( "+\n" );
         return sb.toString();
     }
+
 }

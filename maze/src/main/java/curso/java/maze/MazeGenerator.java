@@ -16,16 +16,28 @@ import java.util.Random;
  */
 public class MazeGenerator {
 
+    private static final int DEFAULT_ROWS = 10;
+    private static final int DEFAULT_COLS = 15;
+
     /**
      * Main program. Generates a maze and prints it.
      * 
      * @param args
      */
     public static void main( String[] args ) {
-        Maze   maze = new Maze();
-        Random r    = new Random();
-        maze.init( 20, 30 );
-        maze.build( r.nextInt( 20 ), r.nextInt( 30 ) );
+        int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
+        switch ( args.length ) {
+        case 2:
+            rows = Integer.parseInt( args[ 0 ] );
+            cols = Integer.parseInt( args[ 1 ] );
+            break;
+        case 1:
+            rows = cols = Integer.parseInt( args[ 0 ] );
+            break;
+        }
+        Maze maze = new Maze();
+        maze.init( rows, cols );
+        maze.build( rows / 2, cols / 2 );
         System.out.println( maze );
     }
 

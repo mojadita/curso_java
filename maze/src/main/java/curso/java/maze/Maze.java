@@ -68,13 +68,15 @@ public class Maze {
     private void checkPos( String from, int row, int col ) {
         int state = 0;
         while ( table[ state ] != null ) {
-            int next = table[ state ][m_random.nextInt( table[ state ].length )];
+            int next = table[ state ][ m_random
+                    .nextInt( table[ state ].length ) ];
             int bit  = state ^ next;
             if ( (bit & NORTH_WALL) != 0 ) checkNorth( row, col );
             if ( (bit & EAST_WALL) != 0 ) checkEast( row, col );
             if ( (bit & SOUTH_WALL) != 0 ) checkSouth( row, col );
             if ( (bit & WEST_WALL) != 0 ) checkWest( row, col );
-            //System.out.println( String.format( "%s: %d -> %d", from, state, next ) );
+            // System.out.println( String.format( "%s: %d -> %d", from, state,
+            // next ) );
             state = next;
         }
 
@@ -143,19 +145,19 @@ public class Maze {
             /* line above cells row */
             for ( int c = 0 ; c < m_cols ; c++ ) {
                 sb.append(
-                        (cells[ r ][ c ] & NORTH_WALL) != 0 ? "+--" : "+  " );
+                        (cells[ r ][ c ] & NORTH_WALL) != 0 ? "+---" : "+   " );
             }
             sb.append( "+\n" ); /* top right corner of last cell */
             for ( int l = 0 ; l < CELL_ROWS ; l++ ) {
                 for ( int c = 0 ; c < m_cols ; c++ ) {
-                    sb.append( (cells[ r ][ c ] & WEST_WALL) != 0 ? "|  "
-                            : "   " );
+                    sb.append( (cells[ r ][ c ] & WEST_WALL) != 0 ? "|   "
+                            : "    " );
                 }
                 sb.append( "|\n" );
             }
         }
         for ( int c = 0 ; c < m_cols ; c++ )
-            sb.append( "+--" );
+            sb.append( "+---" );
         sb.append( "+\n" );
         return sb.toString();
     }

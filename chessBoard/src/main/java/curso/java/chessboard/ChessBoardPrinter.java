@@ -94,24 +94,27 @@ public class ChessBoardPrinter {
         final String spac = "   ";
         final String vert = "|";
         final String rell = "###";
+        final String top = "===";
 
+        //Printing the Table
+        out.println(myboard_Start_game);
         // linea de cabecera
-        imprimeLineaDeSeparacion(esq, dob, "===", esq, size, out);
+        imprimeLineaDeSeparacion(esq, dob, top, esq, size, out);
         for (int r = 0; r < size; r++) {
             if (r != 0)
                 // linea de separacion
-                imprimeLineaDeSeparacion("+", "---", "---", "+", size, out);
+                imprimeLineaDeSeparacion(esq, simp, simp, esq, size, out);
             // contenido
             if (r % 2 == 0) {
-                imprimeLineaDeSeparacion("|", "###", "   ", "|", size, out);
-                imprimeLineaDeSeparacion("|", "###", "   ", "|", size, out);
+                imprimeLineaDeSeparacion(vert, rell, spac, vert, size, out);
+                imprimeLineaDeSeparacion(vert, rell, spac, vert, size, out);
             } else {
-                imprimeLineaDeSeparacion("|", "   ", "###", "|", size, out);
-                imprimeLineaDeSeparacion("|", "   ", "###", "|", size, out);
+                imprimeLineaDeSeparacion(vert, spac, rell, vert, size, out);
+                imprimeLineaDeSeparacion(vert, spac, rell, vert, size, out);
             }
         }
         // linea de cierre
-        imprimeLineaDeSeparacion("+", "===", "===", "+", size, out);
+        imprimeLineaDeSeparacion(esq, top, top, esq, size, out);
     }
 
     public static void imprimeLineaDeSeparacion(String patt1, String patt1bis, String patt1tris, String patt2, int cols, PrintStream out) {

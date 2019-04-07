@@ -1,0 +1,2 @@
+#!/bin/sh
+exec java -jar target/chessBoard-0.0.1-SNAPSHOT.jar "$@"

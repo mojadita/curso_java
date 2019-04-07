@@ -128,10 +128,11 @@ public class ChessBoardPrinter {
     }
 
     /**
-     * Main program.  Don't touch anything here.
+     * Main program. Don't touch anything here.
+     * 
      * @param args You can specify a single argument specifying the
-     * number of cells the size of the board has.  If you pass more
-     * arguments than one, the rest are ignored.
+     *             number of cells the size of the board has. If you pass more
+     *             arguments than one, the rest are ignored.
      */
     public static void main( String[] args ) {
         int size = DEFAULT_SIZE;

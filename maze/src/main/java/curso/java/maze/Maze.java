@@ -21,7 +21,7 @@ public class Maze {
     public static final byte MARKED_CELL = (1 << 4);
     public static final byte ALL_WALLS   = NORTH_WALL | EAST_WALL | SOUTH_WALL
             | WEST_WALL;
-    public static final int  CELL_ROWS   = 1;
+    public static final int  CELL_ROWS   = 0;
 
     static final int[][] table = new int[][] { //
         /*    0 */ new int[] { 1, 2, 4, 8
@@ -137,29 +137,54 @@ public class Maze {
         checkPos( "checkWest", row, col );
     }
 
+    private static final String[] line_chars = { 
+        "\u2591", "\u2576", "\u2575",
+        "\u2514", "\u2574", "\u2500", "\u2518",
+        "\u2534", "\u2577", "\u250c", "\u2502", "\u251c",
+        "\u2510", "\u252c", "\u2524", "\u253c"
+    };
 
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
-        for ( int r = 0 ; r < m_rows ; r++ ) {
-            /* line above cells row */
-            for ( int c = 0 ; c < m_cols ; c++ ) {
-                sb.append(
-                        (cells[ r ][ c ] & NORTH_WALL) != 0 ? "+---" : "+   " );
-            }
-            sb.append( "+\n" ); /* top right corner of last cell */
-            for ( int l = 0 ; l < CELL_ROWS ; l++ ) {
-                for ( int c = 0 ; c < m_cols ; c++ ) {
-                    sb.append( (cells[ r ][ c ] & WEST_WALL) != 0 ? "|   "
-                            : "    " );
-                }
-                sb.append( "|\n" );
-            }
+        /* first row */
+        sb.append( "\u2554" );
+        for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+            sb.append( (cells[ 0 ][ c ] & EAST_WALL) != 0 //
+                    ? "\u2564" //
+                    : "\u2550" ); //
         }
-        for ( int c = 0 ; c < m_cols ; c++ )
-            sb.append( "+---" );
-        sb.append( "+\n" );
+        sb.append( "\u2557\n" );
+        for ( int r = 0 ; r < m_rows - 1 ; r++ ) {
+            for ( int l = 0 ; l < CELL_ROWS ; l++ ) {
+                sb.append( "\u2551" );
+                for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+                    sb.append( (cells[ r ][ c ] & WEST_WALL) != 0 
+                            ? "\u2502"
+                            : "\u2591" );
+                }
+                sb.append( "\u2551\n" );
+            }
+            /* left */
+            sb.append( (cells[ r ][ 0 ] & SOUTH_WALL) != 0 //
+                    ? "\u255f" //
+                    : "\u2551" );
+            for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+                int val = (cells[ r ][ c ] & (EAST_WALL | SOUTH_WALL))
+                        | (cells[ r + 1 ][ c + 1 ] & (WEST_WALL | NORTH_WALL));
+
+                sb.append( line_chars[ val ] );
+            }
+            sb.append( (cells[ r ][ m_cols - 1 ] & SOUTH_WALL) != 0
+                    ? "\u2562\n"
+                    : "\u2551\n" ); /* top right corner of last cell */
+        }
+        sb.append( "\u255a" );
+        for ( int c = 0 ; c < m_cols - 1 ; c++ )
+            sb.append(
+                    (cells[ m_rows - 1 ][ c ] & EAST_WALL) != 0 ? "\u2550\u2567"
+                            : "\u2550" );
+        sb.append( "\u255d\n" );
         return sb.toString();
     }
-
 }

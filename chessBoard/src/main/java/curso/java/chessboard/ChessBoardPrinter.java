@@ -50,6 +50,81 @@ public class ChessBoardPrinter {
          * instead.
          *  
          */
+
+
+
+        //printBoard(4,); how to use this method ? need something more after the number 4
+        String a_single_header_is_this = "+===+===+===+===+";
+        String a_single_line = "|";
+        String a_single_board =
+                 " +=== +=== +=== +=== + \n" +
+                 " |###|   |###|   | \n" +
+                 " |###|   |###|   | \n" +
+
+                 " +---+---+---+---+ \n" +
+                 " |   |###|   |###| \n" +
+                 " |   |###|   |###| \n" +
+
+                 " +---+---+---+---+ \n" +
+                 " |###|   |###|   | \n" +
+                 " |###|   |###|   | \n" +
+
+                 " +---+---+---+---+ \n" +
+                 " |   |###|   |###| \n" +
+                 " |   |###|   |###| \n" +
+
+                 " +===+===+===+===+   " ;
+
+        String myboard_Start_game = "Beginning the Game...Let's Cheez!!";
+        String myboard =    " +===+===+===+===+ \n"   +
+                            " |T|A|C|R|R|C|A|T| \n"   +
+                            " |P|P|P|P|P|P|P| | \n"   +
+                            " |-|-|-|-|-|-|-|P| \n"   +
+                            " |-|-|-|-|-|-|-|-| \n"   +
+                            " |-|-|-|-|-|-|-|-| \n"   +
+                            " |P|-|-|-|-|-|-|-| \n"   +
+                            " | |P|P|P|P|P|P|P| \n"   +
+                            " |T|A|C|R|R|C|A|T|  \n"  +
+                            " +===+===+===+===+ \n" ;
+        out.println(myboard);
+
+        final String esq = "+";
+        final String dob = "^^";
+        final String simp = "---";
+        final String spac = "   ";
+        final String vert = "|";
+        final String rell = "###";
+        final String top = "===";
+
+        //Printing the Table
+        out.println(myboard_Start_game);
+        // linea de cabecera
+        imprimeLineaDeSeparacion(esq, dob, top, esq, size, out);
+        for (int r = 0; r < size; r++) {
+            if (r != 0)
+                // linea de separacion
+                imprimeLineaDeSeparacion(esq, simp, simp, esq, size, out);
+            // contenido
+            if (r % 2 == 0) {
+                imprimeLineaDeSeparacion(vert, rell, spac, vert, size, out);
+                imprimeLineaDeSeparacion(vert, rell, spac, vert, size, out);
+            } else {
+                imprimeLineaDeSeparacion(vert, spac, rell, vert, size, out);
+                imprimeLineaDeSeparacion(vert, spac, rell, vert, size, out);
+            }
+        }
+        // linea de cierre
+        imprimeLineaDeSeparacion(esq, top, top, esq, size, out);
+    }
+
+    public static void imprimeLineaDeSeparacion(String patt1, String patt1bis, String patt1tris, String patt2, int cols, PrintStream out) {
+        for (int c = 0; c < cols; c++){
+            out.print(patt1);
+            if (c % 2 == 0)
+                out.print(patt1bis);
+            else out.print(patt1tris);
+        }
+        out.println(patt2);
     }
 
     /**

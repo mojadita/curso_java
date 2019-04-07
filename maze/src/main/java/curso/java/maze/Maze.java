@@ -137,11 +137,14 @@ public class Maze {
         checkPos( "checkWest", row, col );
     }
 
-    private static final String[] line_chars = { 
-        "\u2591", "\u2576", "\u2575",
-        "\u2514", "\u2574", "\u2500", "\u2518",
-        "\u2534", "\u2577", "\u250c", "\u2502", "\u251c",
-        "\u2510", "\u252c", "\u2524", "\u253c"
+    private static final String[] line_chars = {
+        /*         NORTH                NORTH
+         *                   EAST       EAST
+         */
+        "·"/* */, "\u2576", "\u2575", "\u2514", //  
+        "\u2574", "\u2500", "\u2518", "\u2534", // SOUTH
+        "\u2577", "\u250c", "\u2502", "\u251c", //       WEST
+        "\u2510", "\u252c", "\u2524", "\u253c"  // SOUTH WEST
     };
 
     @Override
@@ -151,39 +154,40 @@ public class Maze {
         sb.append( "\u250c" );
         for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
             sb.append( (cells[ 0 ][ c ] & EAST_WALL) != 0 //
-                    ? "\u252c" //
-                    : "\u2500" ); //
+                    ? "\u2500\u252c" // T shaped symbol
+                    : "\u2500\u2500" ); // horizontal line
         }
-        sb.append( "\u2510\n" );
+        sb.append( "\u2500\u2510\n" ); // uper right corner.
         for ( int r = 0 ; r < m_rows - 1 ; r++ ) {
             for ( int l = 0 ; l < CELL_ROWS ; l++ ) {
-                sb.append( "\u2503" );
-                for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+                sb.append( " \u2502" ); // vertical line
+                for ( int c = 0 ; c < m_cols ; c++ ) {
                     sb.append( (cells[ r ][ c ] & EAST_WALL) != 0 
-                            ? "\u2502"
-                            : " " );
+                            ? " \u2502" // vertical line 
+                            : "  " );
                 }
-                sb.append( "\u2503\n" );
+                sb.append( "\n" );
             }
             sb.append( (cells[ r ][ 0 ] & SOUTH_WALL) != 0 //
-                    ? "\u251c" //
-                    : "\u2503" );
+                    ? "\u251c" // Left wall with hor wall to the right.
+                    : "\u2502" );
             for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
-                int val = (cells[ r ][ c ] & (EAST_WALL | SOUTH_WALL))
+                int val = (cells[ r ][ c ]         & (EAST_WALL | SOUTH_WALL))
                         | (cells[ r + 1 ][ c + 1 ] & (WEST_WALL | NORTH_WALL));
-
+                sb.append( (cells[r][c] & SOUTH_WALL) != 0 ? "\u2500" : " " );
                 sb.append( line_chars[ val ] );
             }
             sb.append( (cells[ r ][ m_cols - 1 ] & SOUTH_WALL) != 0
-                    ? "\u2524\n"
-                    : "\u2502\n" ); /* top right corner of last cell */
+                    ? "\u2500\u2524\n" // T rotated to the right.
+                    : " \u2502\n" ); // vertical bar.
         }
-        sb.append( "\u2514" );
+        sb.append( "\u2514" ); // bottom left corner.
         for ( int c = 0 ; c < m_cols - 1 ; c++ )
             sb.append(
-                    (cells[ m_rows - 1 ][ c ] & EAST_WALL) != 0 ? "\u2534"
-                            : "\u2500" );
-        sb.append( "\u2518\n" );
+                    (cells[ m_rows - 1 ][ c ] & EAST_WALL) != 0 
+                    ? "\u2500\u2534" // inverted T.
+                    : "\u2500\u2500" ); // horizontal bar.
+        sb.append( "\u2500\u2518\n" ); // bottom right corner.
         return sb.toString();
     }
 }

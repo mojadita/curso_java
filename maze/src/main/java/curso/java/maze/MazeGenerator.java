@@ -11,34 +11,42 @@ import java.util.Random;
 /**
  * Maze generator.
  * 
+ * This class has a {@code public static void} {@link #main(String[])} routine
+ * to create a {@link Maze} of sizes passed as parameters from the command line.
+ * 
  * @author Luis Colorado {@code <luiscoloradourcola@gmail.com>}
  *
  */
 public class MazeGenerator {
 
-    private static final int DEFAULT_ROWS = 10;
-    private static final int DEFAULT_COLS = 15;
+	/**
+	 * Default rows and columns in case they are not specified as arguments to
+	 * {@link #main(String[])}.
+	 */
+	private static final int DEFAULT_ROWS = 10, DEFAULT_COLS = 15;
 
-    /**
-     * Main program. Generates a maze and prints it.
-     * 
-     * @param args
-     */
-    public static void main( String[] args ) {
-        int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
-        switch ( args.length ) {
-        case 2:
-            rows = Integer.parseInt( args[ 0 ] );
-            cols = Integer.parseInt( args[ 1 ] );
-            break;
-        case 1:
-            rows = cols = Integer.parseInt( args[ 0 ] );
-            break;
-        }
-        Maze maze = new Maze();
-        maze.init( rows, cols );
-        maze.build( rows / 2, cols / 2 );
-        System.out.println( maze );
-    }
+	/**
+	 * Main program. Generates a maze and prints it.
+	 * 
+	 * @param args the number of rows and columns of the {@link Maze} to be created.
+	 */
+	public static void main(String[] args) {
+		int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
 
+		switch (args.length) {
+		case 2:
+			rows = Integer.parseInt(args[0]);
+			cols = Integer.parseInt(args[1]);
+			break;
+		case 1:
+			rows = cols = Integer.parseInt(args[0]);
+			break;
+		}
+
+		Maze maze = new Maze();
+		maze.init(rows, cols);
+		Random r = new Random();
+		maze.build(r.nextInt(rows), r.nextInt(cols));
+		System.out.println(maze);
+	}
 }

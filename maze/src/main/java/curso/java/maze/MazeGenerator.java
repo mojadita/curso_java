@@ -48,10 +48,21 @@ public class MazeGenerator {
 
 		Maze maze = new Maze();
 		maze.init(rows, cols);
-		maze.setVisited(row0, col0, row1, col1, true);
-		Random r = maze.getRandom();
+
+		maze.setVisited(0, 0, 6, 6, true);
+		maze.setVisited(rows / 2 - 3, 0, rows / 2 + 3, 6, true);
+		maze.setVisited(rows - 6, 0, rows, 6, true);
+
+		maze.setVisited(0, cols / 2 - 3, 6, cols / 2 + 3, true);
+		maze.setVisited(rows/2 - 8, cols/2 - 8, rows/2 + 8, cols/2 + 8, true);
+		maze.setVisited(rows - 6, cols/2 - 3, rows, cols/2 + 3, true);
+
+		maze.setVisited(0, cols - 6, 6, cols, true);
+		maze.setVisited(rows/2 - 3, cols - 6, rows/2 + 3, cols, true);
+		maze.setVisited(rows - 6, cols - 6, rows, cols, true);
+
 		maze.normalizeMarkedCells();
-		maze.buildFrom(row_beg, col_beg);
+		maze.buildFrom(6, 6);
 		System.out.println(maze);
 	}
 }

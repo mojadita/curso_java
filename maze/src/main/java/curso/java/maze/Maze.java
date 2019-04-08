@@ -434,9 +434,19 @@ public class Maze {
 
 		sb.append(line_chars_interior[cells[0][0] & (WEST_WALL | NORTH_WALL)]);
 		for (int c = 0; c < m_cols - 1; c++) {
-			sb.append(line_chars_interior[((cells[0][c] & NORTH_WALL) != 0 ? SOUTH_WALL : 0) | (cells[0][c + 1] & (NORTH_WALL | WEST_WALL))]);
+			sb.append(line_chars_interior[
+				 ((cells[0][c] & NORTH_WALL) != 0 ? SOUTH_WALL : 0)
+				| (cells[0][c+1] & NORTH_WALL)]);
+			sb.append(line_chars_interior[
+				 ((cells[0][c] & NORTH_WALL) != 0 ? SOUTH_WALL : 0)
+				| (cells[0][c + 1] & (NORTH_WALL | WEST_WALL))]);
 		}
-		sb.append(line_chars_interior[(cells[0][m_cols - 1] & EAST_WALL) | ((cells[0][m_cols - 1] & NORTH_WALL) != 0 ? SOUTH_WALL : 0)]); // uper right corner.
+		sb.append(line_chars_interior[
+			   (cells[0][m_cols - 1] & NORTH_WALL) != 0 ? SOUTH_WALL | NORTH_WALL : 0]);
+		sb.append(line_chars_interior[
+			  ((cells[0][m_cols - 1] & EAST_WALL) != 0 ? WEST_WALL : 0)
+			| ((cells[0][m_cols - 1] & NORTH_WALL) != 0 ? SOUTH_WALL : 0)]); // uper right corner.
+		sb.append("\n");
 
 		/* inter middle rows column row */
 		for (int r = 0; r < m_rows - 1; r++) {

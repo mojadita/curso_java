@@ -14,8 +14,8 @@ import java.util.Random;
  * northwards, southwards, eastwards and westwards.
  * 
  * The maze is inited for the number of rows and columns specified, and then the
- * {@link #build(int, int)} method can be called to begin building the maze from
- * specified cell. It uses a depth first recursive algorithm to explore the
+ * {@link #buildFrom(int, int)} method can be called to begin building the maze
+ * from specified cell. It uses a depth first recursive algorithm to explore the
  * maze, opening walls to neighbour cells from the actually visited. As cells
  * are visited they are marked as accessible and the algorithm finishes upon
  * returning from all the reoursive calls.
@@ -30,18 +30,22 @@ public class Maze {
 	 * cell.
 	 */
 	public static final byte NORTH_WALL = (1 << 0);
+
 	/**
 	 * @see #EAST_WALL
 	 */
 	public static final byte EAST_WALL = (1 << 1);
+
 	/**
 	 * @see #EAST_WALL
 	 */
 	public static final byte SOUTH_WALL = (1 << 2);
+
 	/**
 	 * @see #EAST_WALL
 	 */
 	public static final byte WEST_WALL = (1 << 3);
+
 	/**
 	 * This mark indicates that the cell has been already visited. It can be used to
 	 * force the algorithm not to enter into it, so zones in the {@link Maze} can be
@@ -50,6 +54,7 @@ public class Maze {
 	 * @see #EAST_WALL
 	 */
 	public static final byte MARKED_CELL = (1 << 4);
+
 	/**
 	 * Bit mask with all the walls set. This is the initial mask used in each cell
 	 * to begin calculating the random {@link Maze}.
@@ -57,6 +62,7 @@ public class Maze {
 	 * @see #EAST_WALL
 	 */
 	public static final byte ALL_WALLS = NORTH_WALL | EAST_WALL | SOUTH_WALL | WEST_WALL;
+
 	/**
 	 * This constant opens the possibility of making more than one row for each
 	 * {@link Maze}'s row.
@@ -96,19 +102,22 @@ public class Maze {
 	 * {@link #init(int, int)} method.
 	 */
 	private byte[][] cells;
+
 	/**
 	 * Number of rows and columns of the exterior rectangle to this {@link Maze}.
 	 */
 	private int m_rows, m_cols;
+
 	/**
 	 * Number of cells that are left to visit.
 	 * 
 	 * This field is initialised to the product of rows by the number of columns of
-	 * the {@link Maze}. After the recursive {@link #build(int, int)} algorithm
+	 * the {@link Maze}. After the recursive {@link #buildFrom(int, int)} algorithm
 	 * finishes, it is left with the final number of unvisited cells. This can be
 	 * nonzero, as you can preselect cells so they are not visited by the algorithm.
 	 */
 	private int m_toVisit;
+
 	/**
 	 * {@link Random} instance to take the random decisions.
 	 */
@@ -133,9 +142,9 @@ public class Maze {
 	}
 
 	/**
-	 * Common part of the {@link #checkEast(int, int)},
-	 * {@link #checkNorth(int, int)}, {@link #checkSouth(int, int)} and
-	 * {@link #checkWest(int, int)} methods.
+	 * Common part of the {@link #checkEastTo(int, int)},
+	 * {@link #checkNorthTo(int, int)}, {@link #checkSouthTo(int, int)} and
+	 * {@link #checkWestTo(int, int)} methods.
 	 * 
 	 * It follows the algorithm described in the description of the {@link #table}
 	 * field to visit the next cell in each possible direction.
@@ -146,24 +155,23 @@ public class Maze {
 	 * @param col  next cell's column we are visiting now.
 	 * @see #table
 	 */
-	private void checkPos(String from, int row, int col) {
+	private void checkPosTo(String from, int row, int col) {
 		int state = 0;
 		while (table[state] != null) {
 			int next = table[state][m_random.nextInt(table[state].length)];
 			int bit = state ^ next;
 			if ((bit & NORTH_WALL) != 0)
-				checkNorth(row, col);
+				checkNorthTo(row, col);
 			if ((bit & EAST_WALL) != 0)
-				checkEast(row, col);
+				checkEastTo(row, col);
 			if ((bit & SOUTH_WALL) != 0)
-				checkSouth(row, col);
+				checkSouthTo(row, col);
 			if ((bit & WEST_WALL) != 0)
-				checkWest(row, col);
+				checkWestTo(row, col);
 			// System.out.println( String.format( "%s: %d -> %d", from, state,
 			// next ) );
 			state = next;
 		}
-
 	}
 
 	/**
@@ -172,10 +180,10 @@ public class Maze {
 	 * @param row cell's row where we init the building process.
 	 * @param col cell's column where we init the building process.
 	 */
-	public void build(int row, int col) {
+	public void buildFrom(int row, int col) {
 		cells[row][col] |= MARKED_CELL;
 		m_toVisit--;
-		checkPos("build", row, col);
+		checkPosTo("buildFrom", row, col);
 	}
 
 	/**
@@ -184,7 +192,7 @@ public class Maze {
 	 * @param row next cell's row.
 	 * @param col next cell's column.
 	 */
-	private void checkNorth(int row, int col) {
+	private void checkNorthTo(int row, int col) {
 		if (row == 0 || (cells[row - 1][col] & MARKED_CELL) != 0 || m_toVisit == 0)
 			return; /* unvisitable or already marked */
 
@@ -193,7 +201,7 @@ public class Maze {
 		cells[row][col] &= ~SOUTH_WALL;
 		cells[row][col] |= MARKED_CELL;
 		m_toVisit--;
-		checkPos("checkNorth", row, col);
+		checkPosTo("checkNorthTo", row, col);
 	}
 
 	/**
@@ -202,7 +210,7 @@ public class Maze {
 	 * @param row next cell's row.
 	 * @param col next cell's column.
 	 */
-	private void checkEast(int row, int col) {
+	private void checkEastTo(int row, int col) {
 		if (col + 1 == m_cols || (cells[row][col + 1] & MARKED_CELL) != 0 || m_toVisit == 0)
 			return; /* unvisitable or already marked */
 		cells[row][col] &= ~EAST_WALL;
@@ -210,7 +218,7 @@ public class Maze {
 		cells[row][col] &= ~WEST_WALL;
 		cells[row][col] |= MARKED_CELL;
 		m_toVisit--;
-		checkPos("checkEast", row, col);
+		checkPosTo("checkEastTo", row, col);
 	}
 
 	/**
@@ -219,7 +227,7 @@ public class Maze {
 	 * @param row next cell's row.
 	 * @param col next cell's column.
 	 */
-	private void checkSouth(int row, int col) {
+	private void checkSouthTo(int row, int col) {
 		if (row + 1 == m_rows || (cells[row + 1][col] & MARKED_CELL) != 0 || m_toVisit == 0)
 			return; /* unvisitable or already marked */
 		cells[row][col] &= ~SOUTH_WALL;
@@ -227,7 +235,7 @@ public class Maze {
 		cells[row][col] &= ~NORTH_WALL;
 		cells[row][col] |= MARKED_CELL;
 		m_toVisit--;
-		checkPos("checkSouth", row, col);
+		checkPosTo("checkSouthTo", row, col);
 	}
 
 	/**
@@ -236,7 +244,7 @@ public class Maze {
 	 * @param row next cell's row.
 	 * @param col next cell's col.
 	 */
-	private void checkWest(int row, int col) {
+	private void checkWestTo(int row, int col) {
 		if (col == 0 || (cells[row][col - 1] & MARKED_CELL) != 0 || m_toVisit == 0)
 			return; /* unvisitable or already marked */
 		cells[row][col] &= ~WEST_WALL;
@@ -244,7 +252,122 @@ public class Maze {
 		cells[row][col] &= ~EAST_WALL;
 		cells[row][col] |= MARKED_CELL;
 		m_toVisit--;
-		checkPos("checkWest", row, col);
+		checkPosTo("checkWestTo", row, col);
+	}
+
+	/**
+	 * Getter for cell at {@code row} and {@code col}.
+	 * 
+	 * @param row row of the cell we want.
+	 * @param col column of the cell we want.
+	 * @return the value of the cell at that point.
+	 */
+	public byte getCellAt(int row, int col) {
+		return cells[row][col];
+	}
+
+	/**
+	 * Setter for cell at {@code row} and {@code col}.
+	 * 
+	 * @param row the row of the cell we want to set.
+	 * @param col the column of the cell we want to set.
+	 * @param val the value to set.
+	 */
+	public void setCellAt(int row, int col, byte val) {
+		this.cells[row][col] = val;
+	}
+
+	/**
+	 * Getter for the {@code rows} attribute.
+	 * 
+	 * @return the {@code int} value of the {@code rows} attribute.
+	 */
+	public int getRows() {
+		return m_rows;
+	}
+
+	/**
+	 * Getter for the {@code int} {@code cols} attribute.
+	 * 
+	 * @return the {@code int} value of the {@code cols} attribute.
+	 */
+	public int getCols() {
+		return m_cols;
+	}
+
+	/**
+	 * Getter fot the {@code int} {@code toVisit} attribute.
+	 * 
+	 * @return the {@code int} value of the {@code toVisit} attribute.
+	 */
+	public int getToVisit() {
+		return m_toVisit;
+	}
+
+	/**
+	 * Getter for the {@link Random} {@code random} attribute.
+	 * 
+	 * @return the {@link Random} value of the {@code random} attribute.
+	 */
+	public Random getRandom() {
+		return m_random;
+	}
+
+	/**
+	 * This method sets/resets the {@link #MARKED_CELL} bit of all cells in the
+	 * rectangle between position(included) {@code [row0, col0]} and (excluded)
+	 * {@code [row1, col1]}, based on the value of the {@code val} parameter.
+	 * 
+	 * @param row0 is the upper row (included) of the rectangle of the region of
+	 *             cells to mark/unmark.
+	 * @param col0 is the left column (included) of the rectangle of the region of
+	 *             cells to mark/unmark.
+	 * @param row1 is the lower row (excluded) of the rectangle of the region of
+	 *             cells to mark/unmark.
+	 * @param col1 is the right column (excluded) of the rectangle of the region of
+	 *             cells to mark/unmark.
+	 * @param val  is {@code true} if you want to mark the region as already visited
+	 *             (not permitted to visit in the building algorithm) or
+	 *             {@code false} if you want to mark the cell as allowed to be
+	 *             visited by the algorithm.
+	 */
+	public void setVisited(int row0, int col0, int row1, int col1, boolean val) {
+		for (int r = row0; r < row1; r++)
+			for (int c = col0; c < col1; c++)
+				if (val)
+					cells[r][c] |= MARKED_CELL;
+				else
+					cells[r][c] &= ~MARKED_CELL;
+	}
+
+	public void normalizeMarkedCells() {
+		for (int r = 0; r < m_rows; r++) {
+			for (int c = 0; c < m_cols; c++) {
+				if ((cells[r][c] & MARKED_CELL) != 0) {
+					// north
+					if (r > 0 && (cells[r - 1][c] & MARKED_CELL) != 0) {
+						cells[r][c] &= ~NORTH_WALL;
+						cells[r - 1][c] &= ~SOUTH_WALL;
+					}
+					// east
+					if (c < m_cols - 1 && (cells[r][c + 1] & MARKED_CELL) != 0) {
+						cells[r][c] &= ~EAST_WALL;
+						cells[r][c + 1] &= ~WEST_WALL;
+					}
+					// south
+					if (r < m_rows - 1 && (cells[r + 1][c] & MARKED_CELL) != 0) {
+						cells[r][c] &= ~SOUTH_WALL;
+						cells[r + 1][c] &= ~NORTH_WALL;
+					}
+
+					// west
+					if (c > 0 && (cells[r][c - 1] & MARKED_CELL) != 0) {
+						cells[r][c] &= ~WEST_WALL;
+						cells[r][c - 1] &= ~EAST_WALL;
+					}
+				}
+			}
+		}
 	}
 
 	/**
@@ -259,32 +382,32 @@ public class Maze {
 	 * is selected.
 	 * 
 	 * Below are shown the cells used and the walls selected to build the table
-	 * entry in {@link #line_chars} to select the south east column {@link String}
-	 * to represent the column and the walls emerging from it.
+	 * entry in {@link #line_chars_interior} to select the south east column
+	 * {@link String} to represent the column and the walls emerging from it.
 	 * 
 	 * <pre>
 	 *        +- - - -+- - - -+
-	 *        |       |       |
-	 *          this       
-	 *          cell >|
-	 *        |   vv >|       |
-	 *        +- -====+====- -+
-	 *        |       |< ^^   |
-	 *                |< and
-	 *                   this
+	 *        | this  |       |
+	 *        | cell  |       |
+	 *        |      &lt;|       |
+	 *        |   vv &lt;|       |
+	 *        +---====+====---+
+	 *        |       |&lt; ^^   |
+	 *        |       |&lt; and  |
+	 *        |       |  this |
 	 *        |       |  one  |
 	 *        +- - - -+- - - -+
 	 * </pre>
 	 */
-	private static final String[] line_chars = {
+	private static final String[] line_chars_interior = {
 			// NORTH
 			// NORTH EAST EAST
-			"·"/* */, "\u2576", "\u2575", "\u2514", //
+			" "/* */, "\u2576", "\u2575", "\u2514", //
 			"\u2574", "\u2500", "\u2518", "\u2534", // SOUTH
 			"\u2577", "\u250c", "\u2502", "\u251c", // WEST
 			"\u2510", "\u252c", "\u2524", "\u253c" // SOUTH WEST
 	};
-
+	
 	/**
 	 * Overriden {@link Object#toString()} method.
 	 * 
@@ -308,13 +431,12 @@ public class Maze {
 		StringBuilder sb = new StringBuilder();
 
 		/* first row, upper part of first maze's row. */
-		sb.append("\u250c");
+
+		sb.append(line_chars_interior[cells[0][0] & (WEST_WALL | NORTH_WALL)]);
 		for (int c = 0; c < m_cols - 1; c++) {
-			sb.append((cells[0][c] & EAST_WALL) != 0 //
-					? "\u2500\u252c" // T shaped symbol
-					: "\u2500\u2500"); // horizontal line
+			sb.append(line_chars_interior[((cells[0][c] & NORTH_WALL) != 0 ? SOUTH_WALL : 0) | (cells[0][c + 1] & (NORTH_WALL | WEST_WALL))]);
 		}
-		sb.append("\u2500\u2510\n"); // uper right corner.
+		sb.append(line_chars_interior[(cells[0][m_cols - 1] & EAST_WALL) | ((cells[0][m_cols - 1] & NORTH_WALL) != 0 ? SOUTH_WALL : 0)]); // uper right corner.
 
 		/* inter middle rows column row */
 		for (int r = 0; r < m_rows - 1; r++) {
@@ -339,7 +461,7 @@ public class Maze {
 				sb.append((cells[r][c] & SOUTH_WALL) != 0 //
 						? "\u2500" // horizontal southern wall
 						: " ") // no southern wall.
-						.append(line_chars[val]); // southern east corner column (with half walls emerging)
+						.append(line_chars_interior[val]); // southern east corner column (with half walls emerging)
 			}
 			// southern east corner column.
 			sb.append((cells[r][m_cols - 1] & SOUTH_WALL) != 0 //

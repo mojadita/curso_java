@@ -23,7 +23,8 @@ public class MazeGenerator {
 	 * Default rows and columns in case they are not specified as arguments to
 	 * {@link #main(String[])}.
 	 */
-	private static final int DEFAULT_ROWS = 10, DEFAULT_COLS = 15;
+	private static final int DEFAULT_ROWS = 30, DEFAULT_COLS = 40, DEFAULT_ROW0 = 12, DEFAULT_ROW1 = 18,
+			DEFAULT_COL0 = 17, DEFAULT_COL1 = 23, DEFAULT_ROW_BEG = 0, DEFAULT_COL_BEG = 0;
 
 	/**
 	 * Main program. Generates a maze and prints it.
@@ -32,6 +33,8 @@ public class MazeGenerator {
 	 */
 	public static void main(String[] args) {
 		int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
+		int row0 = DEFAULT_ROW0, col0 = DEFAULT_COL0, row1 = DEFAULT_ROW1, col1 = DEFAULT_COL1,
+				row_beg = DEFAULT_ROW_BEG, col_beg = DEFAULT_COL_BEG;
 
 		switch (args.length) {
 		case 2:
@@ -45,8 +48,10 @@ public class MazeGenerator {
 
 		Maze maze = new Maze();
 		maze.init(rows, cols);
-		Random r = new Random();
-		maze.build(r.nextInt(rows), r.nextInt(cols));
+		maze.setVisited(row0, col0, row1, col1, true);
+		Random r = maze.getRandom();
+		maze.normalizeMarkedCells();
+		maze.buildFrom(row_beg, col_beg);
 		System.out.println(maze);
 	}
 }

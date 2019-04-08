@@ -6,8 +6,6 @@
  * Copyright: (C) 2019 Luis Colorado. All rights reserved. */
 package curso.java.maze;
 
-import java.util.Random;
-
 /**
  * Maze generator.
  * 
@@ -19,50 +17,50 @@ import java.util.Random;
  */
 public class MazeGenerator {
 
-	/**
-	 * Default rows and columns in case they are not specified as arguments to
-	 * {@link #main(String[])}.
-	 */
-	private static final int DEFAULT_ROWS = 30, DEFAULT_COLS = 40, DEFAULT_ROW0 = 12, DEFAULT_ROW1 = 18,
-			DEFAULT_COL0 = 17, DEFAULT_COL1 = 23, DEFAULT_ROW_BEG = 0, DEFAULT_COL_BEG = 0;
+    /**
+     * Default rows and columns in case they are not specified as arguments to
+     * {@link #main(String[])}.
+     */
+    private static final int DEFAULT_ROWS = 30, DEFAULT_COLS = 40;
 
-	/**
-	 * Main program. Generates a maze and prints it.
-	 * 
-	 * @param args the number of rows and columns of the {@link Maze} to be created.
-	 */
-	public static void main(String[] args) {
-		int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
-		int row0 = DEFAULT_ROW0, col0 = DEFAULT_COL0, row1 = DEFAULT_ROW1, col1 = DEFAULT_COL1,
-				row_beg = DEFAULT_ROW_BEG, col_beg = DEFAULT_COL_BEG;
+    /**
+     * Main program. Generates a maze and prints it.
+     * 
+     * @param args the number of rows and columns of the {@link Maze} to be
+     *             created.
+     */
+    public static void main( String[] args ) {
+        int rows = DEFAULT_ROWS, cols = DEFAULT_COLS;
 
-		switch (args.length) {
-		case 2:
-			rows = Integer.parseInt(args[0]);
-			cols = Integer.parseInt(args[1]);
-			break;
-		case 1:
-			rows = cols = Integer.parseInt(args[0]);
-			break;
-		}
+        switch ( args.length ) {
+        case 2:
+            rows = Integer.parseInt( args[ 0 ] );
+            cols = Integer.parseInt( args[ 1 ] );
+            break;
+        case 1:
+            rows = cols = Integer.parseInt( args[ 0 ] );
+            break;
+        }
 
-		Maze maze = new Maze();
-		maze.init(rows, cols);
+        Maze maze = new Maze();
+        maze.init( rows, cols );
 
-		maze.setVisited(0, 0, 6, 6, true);
-		maze.setVisited(rows / 2 - 3, 0, rows / 2 + 3, 6, true);
-		maze.setVisited(rows - 6, 0, rows, 6, true);
+        maze.setVisited( 0, 0, 6, 6, true );
+        maze.setVisited( rows / 2 - 3, 0, rows / 2 + 3, 6, true );
+        maze.setVisited( rows - 6, 0, rows, 6, true );
 
-		maze.setVisited(0, cols / 2 - 3, 6, cols / 2 + 3, true);
-		maze.setVisited(rows/2 - 8, cols/2 - 8, rows/2 + 8, cols/2 + 8, true);
-		maze.setVisited(rows - 6, cols/2 - 3, rows, cols/2 + 3, true);
+        maze.setVisited( 0, cols / 2 - 3, 6, cols / 2 + 3, true );
+        maze.setVisited( rows / 2 - 8, cols / 2 - 8, rows / 2 + 8, cols / 2 + 8,
+                true );
+        maze.setVisited( rows - 6, cols / 2 - 3, rows, cols / 2 + 3, true );
 
-		maze.setVisited(0, cols - 6, 6, cols, true);
-		maze.setVisited(rows/2 - 3, cols - 6, rows/2 + 3, cols, true);
-		maze.setVisited(rows - 6, cols - 6, rows, cols, true);
+        maze.setVisited( 0, cols - 6, 6, cols, true );
+        maze.setVisited( rows / 2 - 3, cols - 6, rows / 2 + 3, cols, true );
+        maze.setVisited( rows - 6, cols - 6, rows, cols, true );
 
-		maze.normalizeMarkedCells();
-		maze.buildFrom(6, 6);
-		System.out.println(maze);
-	}
+        maze.normalizeMarkedCells();
+        maze.buildFrom( 6, 6 );
+
+        System.out.println( maze );
+    }
 }

@@ -62,17 +62,6 @@ public class Maze {
     public static final byte     ALL_WALLS   = NORTH_WALL | EAST_WALL
             | SOUTH_WALL | WEST_WALL;
     /**
-     * This constant opens the possibility of making more than one row for each
-     * {@link Maze}'s row.
-     * 
-     * Making this constant &gt; zero makes the {@link #toString()} method to
-     * draw
-     * {@code CELL_ROWS} extra rows for each {@link Maze}'s row with empty
-     * content
-     * and west and east walls.
-     */
-    public static final int      CELL_ROWS   = 0;
-    /**
      * The next table allows to visit the adjacent cells in a random order in an
      * efficient way. This obeys to a state table in which each direction is
      * marked
@@ -121,7 +110,16 @@ public class Maze {
      * The array of cells of the maze. This is initialized by the
      * {@link #init(int, int)} method.
      */
-    private byte[][]             cells;
+    private byte[][]             m_cells;
+    /**
+     * This constant opens the possibility of making more than one row for each
+     * {@link Maze}'s row.
+     * 
+     * Making this constant &gt; zero makes the {@link #toString()} method to
+     * draw {@link #m_cellRows} extra rows for each {@link Maze}'s row with
+     * empty content and west and east walls.
+     */
+    private int                  m_cellRows  = 0, m_cellCols = 1;
     /**
      * Number of rows and columns of the exterior rectangle to this
      * {@link Maze}.
@@ -143,7 +141,7 @@ public class Maze {
     /**
      * {@link Random} instance to take the random decisions.
      */
-    private Random m_random = new Random();
+    private Random               m_random    = new Random();
 
     /**
      * Initializes maze to an all cells unconnected state.
@@ -155,11 +153,11 @@ public class Maze {
         m_rows    = rows;
         m_cols    = cols;
         m_toVisit = rows * cols;
-        cells     = new byte[rows][];
+        m_cells   = new byte[rows][];
         for ( int r = 0 ; r < rows ; r++ ) {
-            cells[ r ] = new byte[cols];
+            m_cells[ r ] = new byte[cols];
             for ( int c = 0 ; c < cols ; c++ )
-                cells[ r ][ c ] = ALL_WALLS;
+                m_cells[ r ][ c ] = ALL_WALLS;
         }
     }
 
@@ -202,7 +200,7 @@ public class Maze {
      * @param col cell's column where we init the building process.
      */
     public void buildFrom( int row, int col ) {
-        cells[ row ][ col ] |= MARKED_CELL;
+        m_cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
         checkPosTo( "buildFrom", row, col );
     }
@@ -214,14 +212,14 @@ public class Maze {
      * @param col next cell's column.
      */
     private void checkNorthTo( int row, int col ) {
-        if ( row == 0 || (cells[ row - 1 ][ col ] & MARKED_CELL) != 0
+        if ( row == 0 || (m_cells[ row - 1 ][ col ] & MARKED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
 
-        cells[ row ][ col ] &= ~NORTH_WALL;
+        m_cells[ row ][ col ] &= ~NORTH_WALL;
         row-- ;
-        cells[ row ][ col ] &= ~SOUTH_WALL;
-        cells[ row ][ col ] |= MARKED_CELL;
+        m_cells[ row ][ col ] &= ~SOUTH_WALL;
+        m_cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
         checkPosTo( "checkNorthTo", row, col );
     }
@@ -233,13 +231,13 @@ public class Maze {
      * @param col next cell's column.
      */
     private void checkEastTo( int row, int col ) {
-        if ( col + 1 == m_cols || (cells[ row ][ col + 1 ] & MARKED_CELL) != 0
+        if ( col + 1 == m_cols || (m_cells[ row ][ col + 1 ] & MARKED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[ row ][ col ] &= ~EAST_WALL;
+        m_cells[ row ][ col ] &= ~EAST_WALL;
         col++ ;
-        cells[ row ][ col ] &= ~WEST_WALL;
-        cells[ row ][ col ] |= MARKED_CELL;
+        m_cells[ row ][ col ] &= ~WEST_WALL;
+        m_cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
         checkPosTo( "checkEastTo", row, col );
     }
@@ -251,13 +249,13 @@ public class Maze {
      * @param col next cell's column.
      */
     private void checkSouthTo( int row, int col ) {
-        if ( row + 1 == m_rows || (cells[ row + 1 ][ col ] & MARKED_CELL) != 0
+        if ( row + 1 == m_rows || (m_cells[ row + 1 ][ col ] & MARKED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[ row ][ col ] &= ~SOUTH_WALL;
+        m_cells[ row ][ col ] &= ~SOUTH_WALL;
         row++ ;
-        cells[ row ][ col ] &= ~NORTH_WALL;
-        cells[ row ][ col ] |= MARKED_CELL;
+        m_cells[ row ][ col ] &= ~NORTH_WALL;
+        m_cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
         checkPosTo( "checkSouthTo", row, col );
     }
@@ -269,13 +267,13 @@ public class Maze {
      * @param col next cell's col.
      */
     private void checkWestTo( int row, int col ) {
-        if ( col == 0 || (cells[ row ][ col - 1 ] & MARKED_CELL) != 0
+        if ( col == 0 || (m_cells[ row ][ col - 1 ] & MARKED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
-        cells[ row ][ col ] &= ~WEST_WALL;
+        m_cells[ row ][ col ] &= ~WEST_WALL;
         col-- ;
-        cells[ row ][ col ] &= ~EAST_WALL;
-        cells[ row ][ col ] |= MARKED_CELL;
+        m_cells[ row ][ col ] &= ~EAST_WALL;
+        m_cells[ row ][ col ] |= MARKED_CELL;
         m_toVisit-- ;
         checkPosTo( "checkWestTo", row, col );
     }
@@ -288,7 +286,7 @@ public class Maze {
      * @return     the value of the cell at that point.
      */
     public byte getCellAt( int row, int col ) {
-        return cells[ row ][ col ];
+        return m_cells[ row ][ col ];
     }
 
     /**
@@ -299,7 +297,7 @@ public class Maze {
      * @param val the value to set.
      */
     public void setCellAt( int row, int col, byte val ) {
-        this.cells[ row ][ col ] = val;
+        this.m_cells[ row ][ col ] = val;
     }
 
     /**
@@ -318,6 +316,38 @@ public class Maze {
      */
     public int getCols() {
         return m_cols;
+    }
+
+    
+    /**
+     * @return the {@code int} {@code cellRows}.
+     */
+    public int getCellRows() {
+        return m_cellRows;
+    }
+
+    
+    /**
+     * @param cellRows the {@code int} {@code cellRows} to set
+     */
+    public void setCellRows( int cellRows ) {
+        m_cellRows = cellRows;
+    }
+
+    
+    /**
+     * @return the {@code int} {@code cellCols}.
+     */
+    public int getCellCols() {
+        return m_cellCols;
+    }
+
+    
+    /**
+     * @param cellCols the {@code int} {@code cellCols} to set
+     */
+    public void setCellCols( int cellCols ) {
+        m_cellCols = cellCols;
     }
 
     /**
@@ -364,40 +394,130 @@ public class Maze {
         for ( int r = row0 ; r < row1 ; r++ )
             for ( int c = col0 ; c < col1 ; c++ )
                 if ( val )
-                    cells[ r ][ c ] |= MARKED_CELL;
-                else cells[ r ][ c ] &= ~MARKED_CELL;
+                    m_cells[ r ][ c ] |= MARKED_CELL;
+                else m_cells[ r ][ c ] &= ~MARKED_CELL;
     }
 
     public void normalizeMarkedCells() {
         for ( int r = 0 ; r < m_rows ; r++ ) {
             for ( int c = 0 ; c < m_cols ; c++ ) {
-                if ( (cells[ r ][ c ] & MARKED_CELL) != 0 ) {
+                if ( (m_cells[ r ][ c ] & MARKED_CELL) != 0 ) {
                     // north
-                    if ( r > 0 && (cells[ r - 1 ][ c ] & MARKED_CELL) != 0 ) {
-                        cells[ r ][ c ]     &= ~NORTH_WALL;
-                        cells[ r - 1 ][ c ] &= ~SOUTH_WALL;
+                    if ( r > 0 && (m_cells[ r - 1 ][ c ] & MARKED_CELL) != 0 ) {
+                        m_cells[ r ][ c ]     &= ~NORTH_WALL;
+                        m_cells[ r - 1 ][ c ] &= ~SOUTH_WALL;
                     }
                     // east
                     if ( c < m_cols - 1
-                            && (cells[ r ][ c + 1 ] & MARKED_CELL) != 0 ) {
-                        cells[ r ][ c ]     &= ~EAST_WALL;
-                        cells[ r ][ c + 1 ] &= ~WEST_WALL;
+                            && (m_cells[ r ][ c + 1 ] & MARKED_CELL) != 0 ) {
+                        m_cells[ r ][ c ]     &= ~EAST_WALL;
+                        m_cells[ r ][ c + 1 ] &= ~WEST_WALL;
                     }
                     // south
                     if ( r < m_rows - 1
-                            && (cells[ r + 1 ][ c ] & MARKED_CELL) != 0 ) {
-                        cells[ r ][ c ]     &= ~SOUTH_WALL;
-                        cells[ r + 1 ][ c ] &= ~NORTH_WALL;
+                            && (m_cells[ r + 1 ][ c ] & MARKED_CELL) != 0 ) {
+                        m_cells[ r ][ c ]     &= ~SOUTH_WALL;
+                        m_cells[ r + 1 ][ c ] &= ~NORTH_WALL;
                     }
 
                     // west
-                    if ( c > 0 && (cells[ r ][ c - 1 ] & MARKED_CELL) != 0 ) {
-                        cells[ r ][ c ]     &= ~WEST_WALL;
-                        cells[ r ][ c - 1 ] &= ~EAST_WALL;
+                    if ( c > 0 && (m_cells[ r ][ c - 1 ] & MARKED_CELL) != 0 ) {
+                        m_cells[ r ][ c ]     &= ~WEST_WALL;
+                        m_cells[ r ][ c - 1 ] &= ~EAST_WALL;
                     }
                 }
             }
         }
+    }
+
+    /**
+     * Overriden {@link Object#toString()} method.
+     * 
+     * The {@link String} representation of a maze consists in a unicode
+     * representation of the maze made with line drawing characters. As those
+     * characters join at middle line points and center at joining corners, we
+     * must
+     * derive the line drawing representation by using sets of adjacent cells.
+     * 
+     * Beware that some fonts don't implement the full set of linedrawing
+     * characters
+     * and some may get substituted if you try to print them on a device that
+     * has no
+     * character representation of some of these (mainly the four lines that
+     * singly
+     * end in the center of the character from one side of it) While we have
+     * made
+     * our best effort in using a small subset of those, we cannot assume them
+     * all
+     * will be available when the user tries to represent them on his/her output
+     * device.
+     * 
+     * @see java.lang.Object#toString()
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+
+        /* North side of maze */
+        sb.append( encodeNorthWest( m_cells[ 0 ][ 0 ] ) ); // north-west corner
+        for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+            for ( int l = 0 ; l < m_cellCols ; l++ ) // north line of cell
+                sb.append( encodeNorth( m_cells[ 0 ][ c ] ) );
+            sb.append(
+                    encodeNorth( m_cells[ 0 ][ c ], m_cells[ 0 ][ c + 1 ] ) ); // inter-cell
+            // north
+            // column
+        }
+        for ( int ic = 0 ; ic < m_cellCols ; ic++ ) // north line of last cell.
+            sb.append( encodeNorth( m_cells[ 0 ][ m_cols - 1 ] ) );
+        sb.append( encodeNorthEast( m_cells[ 0 ][ m_cols - 1 ] ) ); // north-east
+                                                                    // corner.
+        sb.append( "\n" );
+
+        /* inner rows */
+        for ( int r = 0 ; r < m_rows - 1 ; r++ ) {
+            /* cell body part line */
+            for ( int ir = 0 ; ir < m_cellRows ; ir++ ) {
+                sb.append( encodeWest( m_cells[ r ][ 0 ] ) ); // West wall
+                for ( int c = 0 ; c < m_cols ; c++ ) {
+                    for ( int ic = 0 ; ic < m_cellCols ; ic++ )
+                        sb.append( encodeInterior() );
+                    sb.append( encodeEast( m_cells[ r ][ c ] ) );
+                }
+                sb.append( "\n" ); // end of line.
+            }
+            // southern interrow wall
+            sb.append( encodeWest( m_cells[ r ][ 0 ], m_cells[ r + 1 ][ 0 ] ) );
+            for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+                for ( int l = 0 ; l < m_cellCols ; l++ )
+                    sb.append( encodeSouth( m_cells[ r ][ c ] ) );
+                sb.append( encode( m_cells[ r ][ c ],
+                        m_cells[ r + 1 ][ c + 1 ] ) );
+            }
+            // southeastern column of eastern wall.
+            for ( int ic = 0 ; ic < m_cellCols ; ic++ )
+                sb.append( encodeSouth( m_cells[ r ][ m_cols - 1 ] ) );
+            sb.append( encodeEast( m_cells[ r ][ m_cols - 1 ],
+                    m_cells[ r + 1 ][ m_cols - 1 ] ) );
+            sb.append( "\n" );
+        }
+        // southern size of Maze.
+        sb.append( encodeSouthWest( m_cells[ m_rows - 1 ][ 0 ] ) ); // bottom
+                                                                    // left
+                                                                    // corner.
+        for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
+            for ( int ic = 0 ; ic < m_cellCols ; ic++ )
+                sb.append( encodeSouth( m_cells[ m_rows - 1 ][ c ] ) );
+            sb.append( encodeSouth( m_cells[ m_rows - 1 ][ c ],
+                    m_cells[ m_rows - 1 ][ c + 1 ] ) );
+        }
+        for ( int ic = 0 ; ic < m_cellCols ; ic++ )
+            sb.append( encodeSouth( m_cells[ m_rows - 1 ][ m_cols - 1 ] ) );
+        sb.append( encodeSouthEast( m_cells[ m_rows - 1 ][ m_cols - 1 ] ) ); // bottom
+                                                                             // right
+                                                                             // corner.
+
+        return sb.toString();
     }
 
     /**
@@ -444,101 +564,77 @@ public class Maze {
         "\u2510", "\u252c", "\u2524", "\u253c" // SOUTH WEST
     };
 
-    /**
-     * Overriden {@link Object#toString()} method.
-     * 
-     * The {@link String} representation of a maze consists in a unicode
-     * representation of the maze made with line drawing characters. As those
-     * characters join at middle line points and center at joining corners, we
-     * must
-     * derive the line drawing representation by using sets of adjacent cells.
-     * 
-     * Beware that some fonts don't implement the full set of linedrawing
-     * characters
-     * and some may get substituted if you try to print them on a device that
-     * has no
-     * character representation of some of these (mainly the four lines that
-     * singly
-     * end in the center of the character from one side of it) While we have
-     * made
-     * our best effort in using a small subset of those, we cannot assume them
-     * all
-     * will be available when the user tries to represent them on his/her output
-     * device.
-     * 
-     * @see java.lang.Object#toString()
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
+    private String encodeNorth( int west, int east ) {
+        int val = (east & (NORTH_WALL | WEST_WALL));
+        val |= (west & NORTH_WALL) != 0 ? SOUTH_WALL : 0;
+        return line_chars_interior[ val ];
+    }
 
-        /* first row, upper part of first maze's row. */
+    private String encodeNorthEast( int corner ) {
+        int val = (corner & EAST_WALL) != 0 ? WEST_WALL : 0;
+        val |= (corner & NORTH_WALL) != 0 ? SOUTH_WALL : 0;
+        return line_chars_interior[ val ];
+    }
 
-        sb.append( line_chars_interior[ cells[ 0 ][ 0 ]
-                & (WEST_WALL | NORTH_WALL) ] );
-        for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
-            sb.append( line_chars_interior[ ((cells[ 0 ][ c ] & NORTH_WALL) != 0
-                    ? SOUTH_WALL
-                    : 0) | (cells[ 0 ][ c + 1 ] & NORTH_WALL) ] );
-            sb.append( line_chars_interior[ ((cells[ 0 ][ c ] & NORTH_WALL) != 0
-                    ? SOUTH_WALL
-                    : 0) | (cells[ 0 ][ c + 1 ] & (NORTH_WALL | WEST_WALL)) ] );
-        }
-        sb.append( line_chars_interior[ (cells[ 0 ][ m_cols - 1 ]
-                & NORTH_WALL) != 0 ? SOUTH_WALL | NORTH_WALL : 0 ] );
-        sb.append( line_chars_interior[ ((cells[ 0 ][ m_cols - 1 ]
-                & EAST_WALL) != 0 ? WEST_WALL : 0)
-                | ((cells[ 0 ][ m_cols - 1 ] & NORTH_WALL) != 0 ? SOUTH_WALL
-                        : 0) ] ); // uper right corner.
-        sb.append( "\n" );
+    private String encodeEast( int north, int south ) {
+        int val = north & (EAST_WALL | SOUTH_WALL);
+        val |= (south & EAST_WALL) != 0 ? WEST_WALL : 0;
+        return line_chars_interior[ val ];
+    }
 
-        /* inter middle rows column row */
-        for ( int r = 0 ; r < m_rows - 1 ; r++ ) {
-            /* if we are printing more than one line per row */
-            for ( int l = 0 ; l < CELL_ROWS ; l++ ) {
-                sb.append( " " );
-                sb.append( "\u2502" ); // vertical line
-                for ( int c = 0 ; c < m_cols ; c++ ) {
-                    sb.append( (cells[ r ][ c ] & EAST_WALL) != 0 //
-                            ? " \u2502" // east wall vertical line
-                            : "  " ); // no east wall
-                }
-                sb.append( "\n" ); // end of line.
-            }
-            // west side wall.
-            sb.append( (cells[ r ][ 0 ] & SOUTH_WALL) != 0 //
-                    ? "\u251c" // Left vertical wall with horizontal wall
-                               // emerging to the right.
-                    : "\u2502" ); // left vertical wall with no horizontal wall
-                                  // emerging from it.
-            // southern side horizontal wall and southern/east corner column
-            // (with walls
-            // emerging from it)
-            for ( int c = 0 ; c < m_cols - 1 ; c++ ) {
-                int val = (cells[ r ][ c ] & (EAST_WALL | SOUTH_WALL))
-                        | (cells[ r + 1 ][ c + 1 ] & (WEST_WALL | NORTH_WALL));
-                sb.append( (cells[ r ][ c ] & SOUTH_WALL) != 0 //
-                        ? "\u2500" // horizontal southern wall
-                        : " " ) // no southern wall.
-                        .append( line_chars_interior[ val ] ); // southern east
-                                                               // corner column
-                                                               // (with half
-                                                               // walls
-                                                               // emerging)
-            }
-            // southern east corner column.
-            sb.append( (cells[ r ][ m_cols - 1 ] & SOUTH_WALL) != 0 //
-                    ? "\u2500\u2524\n" // T rotated to the right.
-                    : " \u2502\n" ); // vertical bar.
-        }
-        // bottom size of Maze.
-        sb.append( "\u2514" ); // bottom left corner.
-        for ( int c = 0 ; c < m_cols - 1 ; c++ )
-            sb.append( (cells[ m_rows - 1 ][ c ] & EAST_WALL) != 0 //
-                    ? "\u2500\u2534" // inverted T.
-                    : "\u2500\u2500" ); // just horizontal bar.
-        sb.append( "\u2500\u2518\n" ); // bottom right corner.
+    private String encodeEast( int cell ) {
+        return encodeEast( cell & EAST_WALL, cell & EAST_WALL );
+    }
 
-        return sb.toString();
+    private String encodeSouthEast( int corner ) {
+        int val = corner & (SOUTH_WALL | EAST_WALL);
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeSouth( int west, int east ) {
+        int val = west & (SOUTH_WALL | EAST_WALL);
+        val |= (east & SOUTH_WALL) != 0 ? NORTH_WALL : 0;
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeSouth( int cell ) {
+        return encodeSouth( cell & SOUTH_WALL, cell & SOUTH_WALL );
+    }
+
+    private String encodeSouthWest( int corner ) {
+        int val = (corner & WEST_WALL) != 0 ? EAST_WALL : 0;
+        val |= (corner & SOUTH_WALL) != 0 ? NORTH_WALL : 0;
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeWest( int north, int south ) {
+        int val = south & (NORTH_WALL | WEST_WALL);
+        val |= (north & WEST_WALL) != 0 ? EAST_WALL : 0;
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeWest( int cell ) {
+        return encodeWest( cell & WEST_WALL, cell & WEST_WALL );
+    }
+
+    private String encodeNorthWest( int corner ) {
+        int val = corner & (NORTH_WALL | WEST_WALL);
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeNorth( int cell ) {
+        int val = cell & (NORTH_WALL);
+        val |= (cell & NORTH_WALL) != 0 ? SOUTH_WALL : 0;
+        return line_chars_interior[ val ];
+    }
+
+    private String encodeInterior() {
+        return line_chars_interior[ 0 ];
+    }
+
+    private String encode( int north_west, int south_east ) {
+        int val = north_west & (SOUTH_WALL | EAST_WALL);
+        val |= south_east & (NORTH_WALL | WEST_WALL);
+        return line_chars_interior[ val ];
     }
 }

@@ -60,6 +60,8 @@ public class MazeGenerator {
 
         maze.normalizeMarkedCells();
         maze.buildFrom( 6, 6 );
+        maze.setCellCols( 5 );
+        maze.setCellRows( 2 );
 
         System.out.println( maze );
     }

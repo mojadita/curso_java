@@ -477,8 +477,7 @@ public class Maze {
      * 
      * @see java.lang.Object#toString()
      */
-    @Override
-    public String toString() {
+    public String addMaze() {
         StringBuilder sb = new StringBuilder();
 
         /* North side of maze */
@@ -550,6 +549,154 @@ public class Maze {
                                                                              // corner.
 
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        for ( int row = 0 ; row < m_rows ; row++ ) {
+            if ( row == 0 )
+                addFirstLine( sb );
+            else addInterRowLine( row, sb );
+            for ( int n = 0 ; n < m_cellRows ; n++ )
+                addBodyRowLine( row, sb );
+        }
+        addLastLine( sb );
+        return sb.toString();
+    }
+
+    private void addFirstLine( StringBuffer sb ) {
+        for ( int col = 0 ; col < m_cols ; col++ ) {
+            if ( col == 0 )
+                addFirstLineFirstChar( sb );
+            else addInterColTopChar( col, sb );
+            for ( int n = 0 ; n < m_cellCols ; n++ )
+                addCellBodyTopChar( 0, col, sb );
+        }
+        addFirstLineLastChar( sb );
+        sb.append( '\n' );
+    }
+
+    private void addInterRowLine( int row, StringBuffer sb ) {
+        for ( int col = 0 ; col < m_cols ; col++ ) {
+            if ( col == 0 )
+                addInterRowFirstChar( row, sb );
+            else addInterRowInterCellChar( row, col, sb );
+            for ( int n = 0 ; n < m_cellCols ; n++ )
+                addCellBodyTopChar( row, col, sb );
+        }
+        addInterRowLastCellChar( row, sb );
+        sb.append( '\n' );
+    }
+
+    private void addBodyRowLine( int row, StringBuffer sb ) {
+        for ( int col = 0 ; col < m_cols ; col++ ) {
+            addBodyRowInterCellLeftChar( row, col, sb );
+            for ( int n = 0 ; n < m_cellCols ; n++ )
+                addCellBodyChar( sb );
+        }
+        addCellBodyLastChar( row, sb );
+        sb.append( '\n' );
+    }
+
+    private void addLastLine( StringBuffer sb ) {
+        for ( int col = 0 ; col < m_cols ; col++ ) {
+            if ( col == 0 )
+                addLastLineFirstChar( sb );
+            else addLastLineInterCellChar( col, sb );
+            for ( int n = 0 ; n < m_cellCols ; n++ )
+                addCellBodyBottomChar( col, sb );
+        }
+        addLastLineLastChar( sb );
+    }
+
+    private void addFirstLineFirstChar( StringBuffer sb ) {
+        sb.append( m_cells[ 0 ][ 0 ] & (NORTH_WALL | WEST_WALL) );
+    }
+
+    private void addInterColTopChar( int col, StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_north( m_cells[ 0 ][ col - 1 ] )
+                | (m_cells[ 0 ][ col ] & (NORTH_WALL | WEST_WALL)) ] );
+    }
+
+    private void addCellBodyTopChar( int row, int col, StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_north( m_cells[ row ][ col ] )
+                | (m_cells[ row ][ col ] & (NORTH_WALL | WEST_WALL)) ] );
+    }
+
+    private void addFirstLineLastChar( StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_north( m_cells[ 0 ][ m_cols - 1 ] )
+                | move_east( m_cells[ 0 ][ m_cols - 1 ] ) ] );
+    }
+
+    private void addInterRowFirstChar( int row, StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_west( m_cells[ row - 1 ][ 0 ] )
+                | (m_cells[ row ][ 0 ] & (NORTH_WALL | WEST_WALL)) ] );
+    }
+
+    private void addInterRowInterCellChar( int row, int col, StringBuffer sb ) {
+        sb.append( line_chars_interior[ (m_cells[ row - 1 ][ col - 1 ]
+                & (SOUTH_WALL | EAST_WALL))
+                | (m_cells[ row ][ col ] & (NORTH_WALL | WEST_WALL)) ] );
+    }
+
+    private void addInterRowLastCellChar( int row, StringBuffer sb ) {
+        sb.append(
+                line_chars_interior[ move_east( m_cells[ row ][ m_cols - 1 ] )
+                        | (m_cells[ row - 1 ][ m_cols - 1 ]
+                                & (SOUTH_WALL | EAST_WALL)) ] );
+    }
+
+    private void addBodyRowInterCellLeftChar( int row, int col,
+            StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_west( m_cells[ row ][ col ] )
+                | (m_cells[ row ][ col ] & WEST_WALL) ] );
+    }
+
+    private void addCellBodyChar( StringBuffer sb ) {
+        sb.append( line_chars_interior[ 0 ] );
+    }
+
+    private void addCellBodyLastChar( int row, StringBuffer sb ) {
+        sb.append(
+                line_chars_interior[ move_east( m_cells[ row ][ m_cols - 1 ] )
+                        | (m_cells[ row ][ m_cols - 1 ] & EAST_WALL) ] );
+    }
+
+    private void addLastLineFirstChar( StringBuffer sb ) {
+        sb.append( line_chars_interior[ move_south( m_cells[ m_rows - 1 ][ 0 ] )
+                | move_west( m_cells[ m_rows - 1 ][ 0 ] ) ] );
+    }
+
+    private void addLastLineInterCellChar( int col, StringBuffer sb ) {
+        sb.append(
+                line_chars_interior[ move_south( m_cells[ m_rows - 1 ][ col ] )
+                        | (m_cells[ m_rows - 1 ][ col - 1 ]
+                                & (SOUTH_WALL | EAST_WALL)) ] );
+    }
+
+    private void addCellBodyBottomChar( int col, StringBuffer sb ) {
+        sb.append(
+                line_chars_interior[ move_south( m_cells[ m_rows - 1 ][ col ] )
+                        | (m_cells[ m_rows - 1 ][ col ] & (SOUTH_WALL)) ] );
+    }
+
+    private void addLastLineLastChar( StringBuffer sb ) {
+        sb.append( line_chars_interior[ m_cells[ m_rows - 1 ][ m_cols - 1 ]
+                & (SOUTH_WALL | EAST_WALL) ] );
+    }
+    
+    private static int move_north(int arg) {
+        return (arg & NORTH_WALL) != 0 ? SOUTH_WALL : 0;
+    }
+    private static int move_east(int arg) {
+        return(arg & EAST_WALL) != 0 ? WEST_WALL : 0;
+    }
+    private static int move_south(int arg) {
+        return (arg & SOUTH_WALL) != 0 ? NORTH_WALL : 0;
+    }
+    private static int move_west(int arg) {
+        return (arg & WEST_WALL) != 0 ? EAST_WALL : 0;
     }
 
     /**

@@ -300,6 +300,30 @@ public class Maze {
         this.m_cells[ row ][ col ] = val;
     }
 
+    public void buildWallAt( int row, int col, int which_walls ) {
+        m_cells[ row ][ col ] |= which_walls;
+        if ( (which_walls & NORTH_WALL) != 0 && row > 0 )
+            m_cells[ row - 1 ][ col ] |= SOUTH_WALL;
+        if ( (which_walls & SOUTH_WALL) != 0 && row < m_rows - 1 )
+            m_cells[ row + 1 ][ col ] |= NORTH_WALL;
+        if ( (which_walls & EAST_WALL) != 0 && col < m_cols - 1 )
+            m_cells[ row ][ col + 1 ] |= WEST_WALL;
+        if ( (which_walls & WEST_WALL) != 0 && col > 0 )
+            m_cells[ row ][ col - 1 ] |= EAST_WALL;
+    }
+
+    public void destroyWallAt( int row, int col, int which_walls ) {
+        m_cells[ row ][ col ] &= ~which_walls;
+        if ( (which_walls & NORTH_WALL) != 0 && row > 0 )
+            m_cells[ row - 1 ][ col ] &= ~SOUTH_WALL;
+        if ( (which_walls & SOUTH_WALL) != 0 && row < m_rows - 1 )
+            m_cells[ row + 1 ][ col ] &= ~NORTH_WALL;
+        if ( (which_walls & EAST_WALL) != 0 && col < m_cols - 1 )
+            m_cells[ row ][ col + 1 ] &= ~WEST_WALL;
+        if ( (which_walls & WEST_WALL) != 0 && col > 0 )
+            m_cells[ row ][ col - 1 ] &= ~EAST_WALL;
+    }
+
     /**
      * Getter for the {@code rows} attribute.
      * 
@@ -318,7 +342,6 @@ public class Maze {
         return m_cols;
     }
 
-    
     /**
      * @return the {@code int} {@code cellRows}.
      */
@@ -326,7 +349,7 @@ public class Maze {
         return m_cellRows;
     }
 
-    
+
     /**
      * @param cellRows the {@code int} {@code cellRows} to set
      */
@@ -334,7 +357,7 @@ public class Maze {
         m_cellRows = cellRows;
     }
 
-    
+
     /**
      * @return the {@code int} {@code cellCols}.
      */
@@ -342,7 +365,7 @@ public class Maze {
         return m_cellCols;
     }
 
-    
+
     /**
      * @param cellCols the {@code int} {@code cellCols} to set
      */
@@ -502,6 +525,15 @@ public class Maze {
             sb.append( "\n" );
         }
         // southern size of Maze.
+        for ( int ir = 0 ; ir < m_cellRows ; ir++ ) {
+            sb.append( encodeWest( m_cells[ m_rows - 1 ][ 0 ] ) );
+            for ( int c = 0 ; c < m_cols ; c++ ) {
+                for ( int ic = 0 ; ic < m_cellCols ; ic++ )
+                    sb.append( encodeInterior() );
+                sb.append( encodeEast( m_cells[ m_rows - 1 ][ c ] ) );
+            }
+            sb.append( "\n" );
+        }
         sb.append( encodeSouthWest( m_cells[ m_rows - 1 ][ 0 ] ) ); // bottom
                                                                     // left
                                                                     // corner.

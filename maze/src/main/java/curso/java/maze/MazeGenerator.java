@@ -62,6 +62,8 @@ public class MazeGenerator {
         maze.buildFrom( 6, 6 );
         maze.setCellCols( 5 );
         maze.setCellRows( 2 );
+        maze.destroyWallAt( 6, 0, Maze.WEST_WALL );
+        maze.destroyWallAt( rows - 1, cols - 6, Maze.WEST_WALL );
 
         System.out.println( maze );
     }

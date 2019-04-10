@@ -1,15 +1,20 @@
-/* Name: Maze.java Author: Luis Colorado <luiscoloradourcola@gmail.com> Date: 6
- * abr. 2019 20:49:39 Project: maze Package: curso.java.maze Copyright: (C) 2019
- * Luis Colorado. All rights reserved. */
+/* @formatter:off
+ *       Name: Maze.java 
+ *     Author: Luis Colorado <luiscoloradourcola@gmail.com> 
+ *       Date: 6 abr. 2019 20:49:39 
+ *    Project: maze 
+ *    Package: curso.java.maze 
+ *  Copyright: (C) 2019 Luis Colorado. All rights reserved.
+ * @formatter:on */
 package curso.java.maze;
 
 import java.util.Random;
 
 /**
- * This class represents a {@link RandomRecursiveDeepFirstMaze}, that is, a representation fo a
- * rectangular maze of cells with four possible ways to the next four cells,
- * northwards, southwards, eastwards and westwards. The maze is inited for the
- * number of rows and columns specified, and then the
+ * This class represents a {@link RandomRecursiveDeepFirstMaze}, that is, a
+ * representation fo a rectangular maze of cells with four possible ways to the
+ * next four cells, northwards, southwards, eastwards and westwards. The maze is
+ * inited for the number of rows and columns specified, and then the
  * {@link #buildFrom(int, int)} method can be called to begin building the maze
  * from specified cell. It uses a depth first recursive algorithm to explore the
  * maze, opening walls to neighbour cells from the actually visited. As cells
@@ -42,67 +47,67 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
      * two more bits, for the up and down walls.
      * </p>
      */
-    static private final int[][] table = new int[][] { //
-        /* 0 */ new int[] { 1, 2, 4, 8 }, //
-        /* 1 */ new int[] { 3, 5, 9 }, //
-        /* 2 */ new int[] { 3, 6, 10 }, //
-        /* 3 */ new int[] { 7, 11 }, //
-        /* 4 */ new int[] { 5, 6, 12 }, //
-        /* 5 */ new int[] { 7, 13 }, //
-        /* 6 */ new int[] { 7, 14 }, //
-        /* 7 */ new int[] { 15 }, //
-        /* 8 */ new int[] { 9, 10, 12 }, //
-        /* 9 */ new int[] { 11, 13 }, //
-        /* 10 */ new int[] { 11, 14 }, //
-        /* 11 */ new int[] { 15 }, //
-        /* 12 */ new int[] { 13, 14 }, //
-        /* 13 */ new int[] { 15 }, //
-        /* 14 */ new int[] { 15 }, //
-        /* 15 */ null, };
-
+    static private final int[][] table      = new int[][] {                 //@formatter:off
+        /* 0 */ new int[] { 1, 2, 4, 8 },
+        /* 1 */ new int[] { 3, 5, 9 },
+        /* 2 */ new int[] { 3, 6, 10 },
+        /* 3 */ new int[] { 7, 11 },
+        /* 4 */ new int[] { 5, 6, 12 },
+        /* 5 */ new int[] { 7, 13 },
+        /* 6 */ new int[] { 7, 14 },
+        /* 7 */ new int[] { 15 },
+        /* 8 */ new int[] { 9, 10, 12 },
+        /* 9 */ new int[] { 11, 13 },
+        /* 10 */ new int[] { 11, 14 },
+        /* 11 */ new int[] { 15 },
+        /* 12 */ new int[] { 13, 14 },
+        /* 13 */ new int[] { 15 },
+        /* 14 */ new int[] { 15 },
+        /* 15 */ null, 
+        }; //@formatter:on
     /**
      * The array of cells of the maze. This is initialized by the
      * {@link #init(int, int)} method.
      */
-    private byte[][] m_cells;
-
+    private byte[][]             m_cells;
     /**
      * This constant opens the possibility of making more than one row for each
-     * {@link RandomRecursiveDeepFirstMaze}'s row. Making this constant &gt; zero makes the
-     * {@link #toString()} method to draw {@link #m_cellRows} extra rows for
-     * each {@link RandomRecursiveDeepFirstMaze}'s row with empty content and west and east walls.
+     * {@link RandomRecursiveDeepFirstMaze}'s row. Making this constant &gt;
+     * zero makes the {@link #toString()} method to draw {@link #m_cellRows}
+     * extra rows for each {@link RandomRecursiveDeepFirstMaze}'s row with empty
+     * content and west and east walls.
      */
-    private int    m_cellRows = 0;
+    private int                  m_cellRows = 0;
     /**
      * This field represents the number of character columns per cell body. The
      * cell is constructed of cell body chars and intercell wall chars. This
      * number represents the number of columns dedicated to build the interior
      * of the cell.
      */
-    private int    m_cellCols = 1;
+    private int                  m_cellCols = 1;
     /**
      * Number of rows of this {@link RandomRecursiveDeepFirstMaze}.
      */
-    private int    m_rows;
+    private int                  m_rows;
     /**
      * Number of rows this {@link RandomRecursiveDeepFirstMaze} has.
      */
-    private int    m_cols;
+    private int                  m_cols;
     /**
      * Number of cells that are left to visit.
      * <p>
      * This field is initialised to the product of rows by the number of columns
-     * of the {@link RandomRecursiveDeepFirstMaze}. After the recursive {@link #buildFrom(int, int)}
-     * algorithm finishes, it is left with the final number of unvisited cells.
-     * This can be nonzero, as you can preselect cells so they are not visited
-     * by the algorithm.
+     * of the {@link RandomRecursiveDeepFirstMaze}. After the recursive
+     * {@link #buildFrom(int, int)} algorithm finishes, it is left with the
+     * final number of unvisited cells. This can be nonzero, as you can
+     * preselect cells so they are not visited by the algorithm.
      * </p>
      */
-    private int    m_toVisit;
+    private int                  m_toVisit;
     /**
      * {@link Random} instance to take the random decisions.
      */
-    private Random m_random   = new Random();
+    private Random               m_random   = new Random();
 
     /**
      * Initializes maze to an all cells unconnected state.
@@ -162,7 +167,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
     }
 
     /**
-     * Entry method to the recursive algorithm to build the {@link RandomRecursiveDeepFirstMaze}.
+     * Entry method to the recursive algorithm to build the
+     * {@link RandomRecursiveDeepFirstMaze}.
      * <p>
      * The recursive algorithm tries to visit each non-visited cell from this
      * one, using any possible directions in a random order, until all
@@ -221,7 +227,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
      * @param col next cell's column.
      */
     private void checkEastTo( int row, int col ) {
-        if ( col + 1 == m_cols || (m_cells[ row ][ col + 1 ] & VISITED_CELL) != 0
+        if ( col + 1 == m_cols
+                || (m_cells[ row ][ col + 1 ] & VISITED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
         m_cells[ row ][ col ] &= ~EAST_WALL;
@@ -244,7 +251,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
      * @param col next cell's column.
      */
     private void checkSouthTo( int row, int col ) {
-        if ( row + 1 == m_rows || (m_cells[ row + 1 ][ col ] & VISITED_CELL) != 0
+        if ( row + 1 == m_rows
+                || (m_cells[ row + 1 ][ col ] & VISITED_CELL) != 0
                 || m_toVisit == 0 )
             return; /* unvisitable or already marked */
         m_cells[ row ][ col ] &= ~SOUTH_WALL;
@@ -416,9 +424,10 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
     /**
      * Normalize the cells.
      * <p>
-     * This function iterates all the cells of the {@link RandomRecursiveDeepFirstMaze}, searching for
-     * visited cells. On each cell, if the cell is visited, connects it to all
-     * surrounding cells (dropping the walls) if they are also visisted.
+     * This function iterates all the cells of the
+     * {@link RandomRecursiveDeepFirstMaze}, searching for visited cells. On
+     * each cell, if the cell is visited, connects it to all surrounding cells
+     * (dropping the walls) if they are also visisted.
      * </p>
      * <p>
      * <b>Note:</b> this algorithm <b>only</b> drops the walls between visited
@@ -431,7 +440,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
             for ( int c = 0 ; c < m_cols ; c++ ) {
                 if ( (m_cells[ r ][ c ] & VISITED_CELL) != 0 ) {
                     // north
-                    if ( r > 0 && (m_cells[ r - 1 ][ c ] & VISITED_CELL) != 0 ) {
+                    if ( r > 0
+                            && (m_cells[ r - 1 ][ c ] & VISITED_CELL) != 0 ) {
                         m_cells[ r ][ c ]     &= ~NORTH_WALL;
                         m_cells[ r - 1 ][ c ] &= ~SOUTH_WALL;
                     }
@@ -449,7 +459,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
                     }
 
                     // west
-                    if ( c > 0 && (m_cells[ r ][ c - 1 ] & VISITED_CELL) != 0 ) {
+                    if ( c > 0
+                            && (m_cells[ r ][ c - 1 ] & VISITED_CELL) != 0 ) {
                         m_cells[ r ][ c ]     &= ~WEST_WALL;
                         m_cells[ r ][ c - 1 ] &= ~EAST_WALL;
                     }
@@ -666,7 +677,8 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
      * @see      #line_chars_interior
      */
     private void addFirstLineFirstChar( StringBuffer sb ) {
-        sb.append( m_cells[ 0 ][ 0 ] & (NORTH_WALL | WEST_WALL) );
+        sb.append( line_chars_interior[ m_cells[ 0 ][ 0 ]
+                & (NORTH_WALL | WEST_WALL) ] );
     }
 
     /**
@@ -732,7 +744,7 @@ public class RandomRecursiveDeepFirstMaze implements Maze {
      */
     private void addCellBodyTopChar( int row, int col, StringBuffer sb ) {
         sb.append( line_chars_interior[ move_north( m_cells[ row ][ col ] )
-                | (m_cells[ row ][ col ] & (NORTH_WALL | WEST_WALL)) ] );
+                | (m_cells[ row ][ col ] & NORTH_WALL) ] );
     }
 
     /**

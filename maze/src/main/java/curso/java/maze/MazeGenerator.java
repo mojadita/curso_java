@@ -10,7 +10,7 @@ package curso.java.maze;
  * Maze generator.
  * 
  * This class has a {@code public static void} {@link #main(String[])} routine
- * to create a {@link Maze} of sizes passed as parameters from the command line.
+ * to create a {@link RandomRecursiveDeepFirstMaze} of sizes passed as parameters from the command line.
  * 
  * @author Luis Colorado {@code <luiscoloradourcola@gmail.com>}
  *
@@ -26,7 +26,7 @@ public class MazeGenerator {
     /**
      * Main program. Generates a maze and prints it.
      * 
-     * @param args the number of rows and columns of the {@link Maze} to be
+     * @param args the number of rows and columns of the {@link RandomRecursiveDeepFirstMaze} to be
      *             created.
      */
     public static void main( String[] args ) {
@@ -42,7 +42,7 @@ public class MazeGenerator {
             break;
         }
 
-        Maze maze = new Maze();
+        RandomRecursiveDeepFirstMaze maze = new RandomRecursiveDeepFirstMaze();
         maze.init( rows, cols );
 
         maze.setVisited( 0, 0, 6, 6, true );

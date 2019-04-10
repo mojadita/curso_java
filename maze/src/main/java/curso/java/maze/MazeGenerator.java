@@ -56,14 +56,14 @@ public class MazeGenerator {
 
         maze.setVisited( 0, 0, 6, 6, true );
         maze.setVisited( rows / 2 - 3, 0, rows / 2 + 3, 6, true );
-        //maze.setVisited( rows - 6, 0, rows, 6, true );
+        maze.setVisited( rows - 6, 0, rows, 6, true );
 
         maze.setVisited( 0, cols / 2 - 3, 6, cols / 2 + 3, true );
         maze.setVisited( rows / 2 - 8, cols / 2 - 8, rows / 2 + 8, cols / 2 + 8,
                 true );
         maze.setVisited( rows - 6, cols / 2 - 3, rows, cols / 2 + 3, true );
 
-        //maze.setVisited( 0, cols - 6, 6, cols, true );
+        maze.setVisited( 0, cols - 6, 6, cols, true );
         maze.setVisited( rows / 2 - 3, cols - 6, rows / 2 + 3, cols, true );
         maze.setVisited( rows - 6, cols - 6, rows, cols, true );
 

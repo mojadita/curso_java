@@ -1,2 +1,2 @@
 #!/bin/sh
-exec java -jar target/maze-1.0.0.jar "$@"
+exec java -Xss32m -jar target/maze-1.0.0.jar "$@"

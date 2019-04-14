@@ -27,22 +27,27 @@ public class LinkedListClientMain {
         BufferedReader in          = new BufferedReader(
                 new InputStreamReader( new FileInputStream( args[ 0 ] ) ) );
         String         line;
-        Node<String>   collar_head = null;
         Node<String>   collar_tail = null;
         while ( (line = in.readLine()) != null ) {
             Node<String> cuenta = new Node<String>();
             cuenta.setData( line );
-            cuenta.setNext( null );
-            if ( collar_head == null ) {
-                collar_head = cuenta;
-            } else {
+
+            if ( collar_tail != null ) {
+                cuenta.setNext( collar_tail.getNext() );
                 collar_tail.setNext( cuenta );
+                collar_tail = cuenta;
+            } else {
+                cuenta.setNext( cuenta );
             }
-            collar_tail = cuenta;
+
         }
 
-        for ( Node<String> n = collar_head ; n != null ; n = n.getNext() ) {
-            System.out.println( "[" + n.getData() + "]" );
+        if ( collar_tail != null ) {
+            Node<String> cuenta = collar_tail.getNext(); // first element
+            int n = 0;
+            do {
+                System.out.println(++n + ": " + cuenta.getData());
+            } while (cuenta != collar_tail);
         }
     }
 }

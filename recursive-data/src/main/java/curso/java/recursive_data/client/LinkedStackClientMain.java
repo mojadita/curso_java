@@ -18,31 +18,25 @@ import curso.java.recursive_data.Node;
  * @author Luis Colorado {@code <luiscoloradourcola@gmail.com>}
  *
  */
-public class LinkedListClientMain {
+public class LinkedStackClientMain {
 
     public static void main( String args[] ) throws FileNotFoundException,
             IllegalArgumentException, IOException {
         if ( args.length < 1 )
             throw new IllegalArgumentException( "Must specify a file name" );
-        BufferedReader in          = new BufferedReader(
+        BufferedReader in     = new BufferedReader(
                 new InputStreamReader( new FileInputStream( args[ 0 ] ) ) );
         String         line;
-        Node<String>   collar_head = null;
-        Node<String>   collar_tail = null;
+        Node<String>   collar = null;
         while ( (line = in.readLine()) != null ) {
             Node<String> cuenta = new Node<String>();
             cuenta.setData( line );
-            cuenta.setNext( null );
-            if ( collar_head == null ) {
-                collar_head = cuenta;
-            } else {
-                collar_tail.setNext( cuenta );
-            }
-            collar_tail = cuenta;
+            cuenta.setNext( collar );
+            collar = cuenta;
         }
 
-        for ( Node<String> n = collar_head ; n != null ; n = n.getNext() ) {
-            System.out.println( "[" + n.getData() + "]" );
+        for ( Node<String> n = collar ; n != null ; n = n.getNext() ) {
+            System.out.println( n.getData() );
         }
     }
 }
